@@ -1,4 +1,5 @@
 QT -= gui
+QT += websockets
 
 CONFIG += c++11 console
 CONFIG -= app_bundle
@@ -15,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        src/examplannerserver.cpp \
         src/main.cpp \
         src/dataModel/day.cpp \
         src/dataModel/group.cpp \
@@ -35,7 +37,8 @@ HEADERS += \
         src/dataModel/semester.h \
         src/dataModel/serializabledataobject.h \
         src/dataModel/timeslot.h \
-        src/dataModel/week.h
+        src/dataModel/week.h \
+        src/examplannerserver.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
