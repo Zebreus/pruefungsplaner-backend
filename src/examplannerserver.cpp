@@ -160,11 +160,9 @@ ExamPlannerServer::ExamPlannerServer(QObject *parent) : QObject(parent)
     plans = getSemesters();
 }
 
-QString ExamPlannerServer::getPlans()
+QJsonValue ExamPlannerServer::getPlans()
 {
-    QJsonDocument document;
-    document.setArray(plans.toArray());
-    return document.toJson(QJsonDocument::Compact);
+    return plans;
 }
 
 void ExamPlannerServer::setPlans(QString newplans)

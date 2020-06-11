@@ -28,7 +28,7 @@ public:
 signals:
 
 public slots:
-    QString getPlans();
+    QJsonValue getPlans();
     void setPlans(QString newplans);
 };
 
