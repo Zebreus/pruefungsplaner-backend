@@ -15,7 +15,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        src/main.cpp
+        src/main.cpp \
+        src/dataModel/day.cpp \
+        src/dataModel/group.cpp \
+        src/dataModel/module.cpp \
+        src/dataModel/plan.cpp \
+        src/dataModel/semester.cpp \
+        src/dataModel/serializabledataobject.cpp \
+        src/dataModel/timeslot.cpp \
+        src/dataModel/week.cpp
+
+HEADERS += \
+        qt-jsonrpc-server/src/jsonrpcserver.h \
+        qt-jsonrpc-server/src/jsonrpcconnection.h \
+        src/dataModel/day.h \
+        src/dataModel/group.h \
+        src/dataModel/module.h \
+        src/dataModel/plan.h \
+        src/dataModel/semester.h \
+        src/dataModel/serializabledataobject.h \
+        src/dataModel/timeslot.h \
+        src/dataModel/week.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
