@@ -150,7 +150,7 @@ QJsonValue getSemesters(){
 
     QJsonArray semesters;
     semesters.append(semestera);
-    semesters.append(semestera);
+    semesters.append(semesterb);
 
     return QJsonValue(semesters);
 }
