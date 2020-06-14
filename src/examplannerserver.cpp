@@ -175,7 +175,7 @@ QJsonValue ExamPlannerServer::getPlans()
     return plans;
 }
 
-void ExamPlannerServer::setPlans(QString newplans)
+void ExamPlannerServer::setPlans(QJsonValue newplans)
 {
-
+    plans = newplans;
 }

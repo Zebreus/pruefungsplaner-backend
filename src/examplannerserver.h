@@ -29,7 +29,7 @@ signals:
 
 public slots:
     QJsonValue getPlans();
-    void setPlans(QString newplans);
+    void setPlans(QJsonValue newplans);
 };
 
 #endif // EXAMPLANNERSERVER_H
