@@ -118,6 +118,16 @@ Plan* createPlan(QObject* parent){
     week_b->getDays().last()->getTimeslots().first()->setActiveGroups(activeGroups);
     week_c->getDays().first()->getTimeslots().last()->setActiveGroups(activeGroups);
 
+    QList<Module*> modules_a, modules_b, modules_c;
+    modules_a.append(module_a);
+    modules_b.append(module_b);
+    modules_c.append(module_a);
+    modules_c.append(module_b);
+    week_a->getDays().first()->getTimeslots().at(0)->setModules(modules_a);
+    week_a->getDays().first()->getTimeslots().at(1)->setModules(modules_b);
+    week_a->getDays().first()->getTimeslots().at(2)->setModules(modules_c);
+    qDebug() << modules_b.size();
+
     QJsonObject plan = m_plan->toJsonObject();
 
     Plan* plan_b = new Plan(parent);
