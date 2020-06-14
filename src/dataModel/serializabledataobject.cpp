@@ -71,7 +71,13 @@ QJsonArray SerializableDataObject::toJsonArray(const QList<QVariant> &list) cons
             //TODO Continue looking for a nicer way to convert QList<QVariant> to QList<SerializableDataObject>
             QList<SerializableDataObject*> sdoPointerList;
             for(QVariant variant: list){
-                sdoPointerList.push_back(variant.value<SerializableDataObject*>());
+                //Only allow one reference to each object in a list
+                //TODO If creating an id list multiple references to the same object should be ok
+                SerializableDataObject* sdoPointer = variant.value<SerializableDataObject*>();
+                if(!sdoPointerList.contains(sdoPointer))
+                {
+                    sdoPointerList.append(sdoPointer);
+                }
             }
             return toJsonArray(sdoPointerList);
         }
