@@ -28,6 +28,9 @@ public:
     Q_INVOKABLE bool containsActiveGroup(Group* gp);
     Q_INVOKABLE void addActiveGroup(Group* gp);
     Q_INVOKABLE void removeActiveGroup(Group* gp);
+    Q_INVOKABLE bool containsModule(Module* gp);
+    Q_INVOKABLE void addModule(Module* gp);
+    Q_INVOKABLE void removeModule(Module* gp);
 
 signals:
     void nameChanged();

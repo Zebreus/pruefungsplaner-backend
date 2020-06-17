@@ -66,6 +66,23 @@ void Timeslot::removeActiveGroup(Group* gp){
     }
 }
 
+bool Timeslot::containsModule(Module* module){
+    return modules.contains(module);
+}
+
+void Timeslot::addModule(Module* module){
+    if (modules.contains(module)){
+        return;
+    }
+    modules.append(module);
+    emit modulesChanged(this->modules);
+}
+
+void Timeslot::removeModule(Module* module){
+    if (modules.removeAll(module) > 0){
+        emit modulesChanged(this->modules);
+    }
+}
 
 void Timeslot::fromJsonObject(const QJsonObject &content)
 {
