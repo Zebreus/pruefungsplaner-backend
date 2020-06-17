@@ -17,7 +17,7 @@ class ExamPlanner : public QObject
     Plan* plan;
 
 public:
-    explicit ExamPlanner(QObject *parent = nullptr, Plan *plan);
+    explicit ExamPlanner(QObject *parent = nullptr, Plan *plan = nullptr);
     int getProgress();
 
 signals:
