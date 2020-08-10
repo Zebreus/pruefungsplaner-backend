@@ -166,7 +166,8 @@ QJsonValue getSemesters(){
     return QJsonValue(semesters);
 }
 
-ExamPlannerServer::ExamPlannerServer(QObject *parent) : QObject(parent)
+ExamPlannerServer::ExamPlannerServer(const QString& publicKey, QObject *parent) :
+    QObject(parent), publicKey(publicKey), authorized(false)
 {
     plans = getSemesters();
 }

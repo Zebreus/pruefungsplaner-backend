@@ -27,8 +27,11 @@ private:
     QJsonValue plannerPlan;
     int plannerProgress;
     QThread examPlannerThread;
+    QString publicKey;
+    bool authorized;
+
 public:
-    explicit ExamPlannerServer(QObject *parent = nullptr);
+    explicit ExamPlannerServer(const QString& publicKey, QObject *parent = nullptr);
 
 signals:
 
