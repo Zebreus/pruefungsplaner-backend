@@ -187,10 +187,10 @@ bool ExamPlannerServer::login(QString token)
 {
     try{
         auto verifier = jwt::verifier<jwt::default_clock,QtJsonTraits>(jwt::default_clock{})
-            .with_claim("pruefungplanerRead",jwt::basic_claim<QtJsonTraits>(QString("true")))
-            .with_claim("pruefungplanerWrite",jwt::basic_claim<QtJsonTraits>(QString("true")))
+            .with_claim("pruefungsplanerRead",jwt::basic_claim<QtJsonTraits>(QString("true")))
+            .with_claim("pruefungsplanerRead",jwt::basic_claim<QtJsonTraits>(QString("true")))
             .allow_algorithm(jwt::algorithm::rs256(publicKey.toUtf8().constData(),"","",""))
-            .with_audience("pruefungsplaner-backend")
+            .with_audience(QJsonArray{"pruefungsplaner-backend"})
             .with_issuer("securityprovider");
 
         auto decodedToken = jwt::decode<QtJsonTraits>(token);
