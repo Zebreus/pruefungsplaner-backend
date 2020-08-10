@@ -26,6 +26,7 @@ SOURCES += \
         src/main.cpp
 
 HEADERS += \
+        src/QtJsonTraits.h \
         src/examplanner.h \
         src/examplannerserver.h
 

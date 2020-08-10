@@ -17,6 +17,9 @@
 #include "timeslot.h"
 #include "week.h"
 
+#include <jwt-cpp/jwt.h>
+
+#include "src/QtJsonTraits.h"
 #include "src/examplanner.h"
 
 class ExamPlannerServer : public QObject
@@ -40,6 +43,7 @@ private slots:
     void progressChanged(int progress);
 
 public slots:
+    bool login(QString token);
     QJsonValue getPlans();
     void setPlans(QJsonValue newplans);
     void startPlanning(QJsonValue plan);
