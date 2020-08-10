@@ -9,13 +9,13 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 
-#include "src/dataModel/day.h"
-#include "src/dataModel/group.h"
-#include "src/dataModel/module.h"
-#include "src/dataModel/plan.h"
-#include "src/dataModel/semester.h"
-#include "src/dataModel/timeslot.h"
-#include "src/dataModel/week.h"
+#include "day.h"
+#include "group.h"
+#include "module.h"
+#include "plan.h"
+#include "semester.h"
+#include "timeslot.h"
+#include "week.h"
 
 #include "src/examplanner.h"
 

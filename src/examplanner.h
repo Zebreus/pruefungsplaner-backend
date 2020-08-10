@@ -3,12 +3,12 @@
 
 #include <QObject>
 #include <QThread>
-#include "src/dataModel/day.h"
-#include "src/dataModel/group.h"
-#include "src/dataModel/module.h"
-#include "src/dataModel/plan.h"
-#include "src/dataModel/timeslot.h"
-#include "src/dataModel/week.h"
+#include "day.h"
+#include "group.h"
+#include "module.h"
+#include "plan.h"
+#include "timeslot.h"
+#include "week.h"
 
 class ExamPlanner : public QObject
 {

@@ -1,5 +1,5 @@
 #include <QCoreApplication>
-#include "qt-jsonrpc-server/src/jsonrpcserver.h"
+#include "server.h"
 #include "src/examplannerserver.h"
 
 int main(int argc, char *argv[])
