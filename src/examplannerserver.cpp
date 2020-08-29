@@ -1,5 +1,7 @@
 #include "examplannerserver.h"
 
+QJsonValue ExamPlannerServer::plans = QJsonValue();
+
 void addTimeslots(Day* day){
     QList<Timeslot*> timeslots;
 
@@ -169,7 +171,9 @@ QJsonValue getSemesters(){
 ExamPlannerServer::ExamPlannerServer(const QString& publicKey, QObject *parent) :
     QObject(parent), publicKey(publicKey), authorized(false)
 {
-    plans = getSemesters();
+    if(plans.isUndefined() || plans.isNull()){
+        plans = getSemesters();
+    }
 }
 
 void ExamPlannerServer::finishedPlanning(Plan *finishedPlan)

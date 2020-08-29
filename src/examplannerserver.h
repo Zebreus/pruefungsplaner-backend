@@ -26,7 +26,7 @@ class ExamPlannerServer : public QObject
 {
     Q_OBJECT
 private:
-    QJsonValue plans;
+    static QJsonValue plans;
     QJsonValue plannerPlan;
     int plannerProgress;
     QThread examPlannerThread;
