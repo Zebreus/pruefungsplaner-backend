@@ -17,6 +17,8 @@
 #include "timeslot.h"
 #include "week.h"
 
+#include "csvloader.h"
+
 #include <jwt-cpp/jwt.h>
 
 #include "src/QtJsonTraits.h"

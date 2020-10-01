@@ -172,7 +172,24 @@ ExamPlannerServer::ExamPlannerServer(const QString& publicKey, QObject *parent) 
     QObject(parent), publicKey(publicKey), authorized(false)
 {
     if(plans.isUndefined() || plans.isNull()){
-        plans = getSemesters();
+
+        CsvLoader loader;
+        Plan* plan = loader.loadPlan();
+        plan->setName("Plan A");
+
+        QList<Plan*> newPlans;
+        newPlans.append(plan);
+
+        Semester* semester = new Semester();
+        semester->setName("WS 2019");
+        plan->setParent(semester);
+        semester->setPlans(newPlans);
+
+        QJsonArray arr;
+        QJsonValue semesterValue = semester->toJsonObject();
+        arr.append(semesterValue);
+
+        plans = QJsonValue(arr);
     }
 }
 
@@ -229,6 +246,7 @@ void ExamPlannerServer::startPlanning(QJsonValue plan)
     ExamPlanner *worker = new ExamPlanner(nullptr, p);
     worker->moveToThread(&examPlannerThread);
     connect(&examPlannerThread, &QThread::finished, worker, &QObject::deleteLater);
+    connect(&examPlannerThread, &QThread::finished, [](){qDebug("Thread finished");});
     connect(worker, &ExamPlanner::finishedPlanning, this, &ExamPlannerServer::finishedPlanning);
     connect(worker, &ExamPlanner::progressChanged, this, &ExamPlannerServer::progressChanged);
     QMetaObject::invokeMethod( worker, "startPlanning", Qt::QueuedConnection );

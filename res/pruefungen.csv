@@ -1,0 +1,127 @@
+// Leezeichen nach "//" sind wichtig!!!!;;;;;;
+// Intervall oder Block;Zuordnung / Zug;Modul;BelegNr,Zug;Import;Form;Anzahl Blöcke pro Termin
+;I Bach 2A,I Bach 2B,I KESS 4,I KITS 4,I KoSI 2;Netzwerke;30.7102;;K;
+;I KoSI 1;Programmieren / Algorithmen und Datenstrukturen 1;30.7104,A;;P;2
+;I Bach 1B,I KITS 1;Programmieren / Algorithmen und Datenstrukturen 1;30.7104,B;;P;2
+;I Bach 1C,I KESS 1;Programmieren / Algorithmen und Datenstrukturen 1;30.7104,C;;P;2
+;I Bach 1D,I KMI 1;Programmieren / Algorithmen und Datenstrukturen 1;30.7104,D;;P;2
+;I Bach 2A,I Bach 2B,I KESS 2,I KITS 2,I KMI 2,I KoSI 2;Rechnerarchitektur;30.7106;;K;
+;I Bach 1B,I Bach 1C,I Bach 1D,I KESS 1,I KITS 1,I KoSI 1;Technische Grundlagen der Informatik;30.7108;;K;
+;I Bach 1B,I Bach 1C,I Bach 1D,I KMI 1,I KoSI 1;Einführung in die Wirtschaftsinformatik;30.7114;;K;
+;I Bach 1B,I Bach 1C,I Bach 1D,I KESS 1,I KITS 1,I KMI 1,I KoSI 1;Grundlagen der diskreten Mathematik;30.7116;MN;K;
+;I Bach 1B,I Bach 1C,I Bach 1D,I KESS 1,I KITS 1,I KMI 1,I KoSI 1;IT-Sicherheit;30.7126;;K;
+;I Bach 3,I KESS 4,I KoSI 4;Mikroprozessorsysteme;30.7204;;K;
+;I Bach 2A,I Bach 2B,I KESS 2,I KITS 2,I KMI 2,I KoSI 2;Objektorientierte Analyse und Design;30.7206;;K;
+;I Bach 2A,I KoSI 2;Programmieren / Algorithmen und Datenstrukturen 2;30.7208,A;;P;2
+;I Bach 2B;Programmieren / Algorithmen und Datenstrukturen 2;30.7208,B;;P;2
+;I Bach 2A,I Bach 2B,I KESS 1,I KITS 1,I KMI 4,I KoSI 1;IT-Recht und Datenschutz;30.7214;GS;K;
+;I Bach 2A,I Bach 2B,I KESS 2,I KITS 2,I KMI 2,I KoSI 2;Lineare Algebra und Wahrscheinlichkeitsrechnung;30.7216;MN;K;
+;I Bach 3,I KESS 6,I KITS 4,I KMI 3,I KoSI 4;Betriebssysteme;30.7300;;K;
+;I Bach 3,I KESS 4,I KITS 4,I KMI 3,I KoSI 4;Datenbanken 1;30.7312;;K;
+;I Bach 3,I KoSI 6;Grundlagen der Analysis;30.7314;MN;K;
+;I Bach 3,I KESS 4,I KITS 4,I KMI 3,I KoSI 4;Nutzerzentrierte Softwareentwicklung;30.7316;;K;
+;I Bach 3,I KESS 4,I KITS 4,I KMI 3,I KoSI 4;Software Engineering;30.7318;;K;
+;I Bach 4,I KMI 4,I KoSI 4;Entwicklung webbasierter Anwendungen;30.7400;;K;
+;I Bach 4,I KMI 4,I KoSI 6;Graphische Datenverarbeitung;30.7402;;K;
+;I Bach 4,I KITS 6,I KMI 4,I KoSI 6;Verteilte Systeme;30.7404;;K;
+;I Bach 4,I KoSI 6;Datenbanken 2;30.7406;;K;
+;I Bach 4,I KESS 6,I KITS 6,I KMI 4,I KoSI 6;Theoretische Informatik;30.7410;;K;
+;I Bach 4,I KESS 2,I KITS 2,I KMI 2,I KoSI 2;Projektmanagement;30.7506;;K;
+// EIT;I KESS 1;Elektrotechnik;83.7126;EIT;K;
+;I KITS 1;IT-Compliance;84.7118;;K;
+;WP_Bach;.Net Framework and C#;30.2508;;K;
+;WP_Bach;Einführung in die Mobilkommunikation;30.2542;;K;
+;WP_Bach;Entscheidungstheorie;30.2612;;K;
+Arghandiwall, Massud, I;WP_Bach;Grundlagen des IT-Controlling;30.2342;;K;
+;WP_Bach;High Performance I/O;30.2620;;K;
+;WP_Bach;Internetworking;30.2602;;K;
+Griesbaum, Alexander, I;WP_Bach;Java EE Datenbankanwendungsentwicklung;30.2520;;K;
+;WP_Bach;Objektorientierte und objektrelationale Datenbanken;30.2366;;K;
+;WP_Bach;Professionelles Testen;30.2476;;K;
+;WP_Bach;Unix for Software Developers;30.2554;;K;
+;WP_Mast;Advanced Communication Networks;41.4976;;K;
+;WP_Mast;Autonome mobile Systeme;41.5014;;K;
+;WP_Mast;Benutzbare Sicherheit;41.5026;;K;
+;WP_Mast;Big Data Technologien;41.4614;;K;
+;WP_Mast;Cloud-native Application Engineering;41.5052;;K;
+;WP_Mast;Codierungstheorie;41.4934;;K;
+;WP_Mast;Computer Graphik;41.4834;;K;
+;WP_Mast;Cryptography;41.4936;;K;
+;WP_Mast;Embedded HMI & Graphics;41.5032;;K;
+;WP_Mast;Logik;41.4970;;K;
+;WP_Mast;Parallel and Distributed Computing;41.4874;;K;
+;WP_Mast;Text- und Web-Mining;41.5042;;K;
+;WP_Mast;Zellulare Netze;41.4906;;K;
+-ENDE-;;;;;;
+;;;;;;
+// KITS ITS (als I KITS 6) und KESS ESS (als I KESS 6) bei WP-Prüfungen mit einbeziehen;;;;;;
+// für aktuell / noch  nicht existente Studis Anz Prüf / Tag auf unendlich (6);;;;;;
+// KESS-Importe von EIT, Tage im Stundenplan der 1.Woche blockieren;;;;;;
+;;;;;;
+;;;;;;
+;;;;;;
+// letztes Mal;;;;;;
+;I Bach 2B,I Bach 2C,I Bach 2D,I KESS 4,I KITS 4,I KoSI 2;Netzwerke;30.7102;;K;
+;I Bach 1A,I KoSI 1;Programmieren / Algorithmen und Datenstrukturen 1;30.7104,A;;P;2
+;I Bach 1B;Programmieren / Algorithmen und Datenstrukturen 1;30.7104,B;;P;2
+;I Bach 2B,I Bach 2C,I Bach 2D,I KESS 2,I KITS 2,I KMI 2,I KoSI 2;Rechnerarchitektur;30.7106;;K;
+;I Bach 1A,I Bach 1B,I KESS 1,I KITS 1,I KoSI 1;Technische Grundlagen der Informatik;30.7108;;K;
+;I Bach 1A,I Bach 1B,I KMI 1,I KoSI 1;Einführung in die Wirtschaftsinformatik;30.7114;;K;
+;I Bach 1A,I Bach 1B,I KESS 1,I KITS 1,I KMI 1,I KoSI 1;Grundlagen der diskreten Mathematik;30.7116;MN;K;
+;I Bach 1A,I Bach 1B,I KESS 1,I KITS 1,I KMI 1,I KoSI 1;IT-Sicherheit;30.7126;;K;
+;I Bach 3,I KESS 4,I KoSI 4;Mikroprozessorsysteme;30.7204;;K;
+;I Bach 2B,I Bach 2C,I Bach 2D,I KESS 2,I KITS 2,I KMI 2,I KoSI 2;Objektorientierte Analyse und Design;30.7206;;K;
+;I KITS 2,I KoSI 2;Programmieren / Algorithmen und Datenstrukturen 2;30.7208,A;;P;2
+;I Bach 2B,I KESS 2;Programmieren / Algorithmen und Datenstrukturen 2;30.7208,B;;P;2
+;I Bach 2C,I KMI 2;Programmieren / Algorithmen und Datenstrukturen 2;30.7208,C;;P;2
+;I Bach 2D;Programmieren / Algorithmen und Datenstrukturen 2;30.7208,D;;P;2
+;I Bach 2B,I Bach 2C,I Bach 2D,I KESS 1,I KITS 1,I KMI 4,I KoSI 1;IT-Recht und Datenschutz;30.7214;GS;K;
+;I Bach 2B,I Bach 2C,I Bach 2D,I KESS 2,I KITS 2,I KMI 2,I KoSI 2;Lineare Algebra und Wahrscheinlichkeitsrechnung;30.7216;MN;K;
+// siehe IT-Recht+ Datenschutz;I Bach 2B,I Bach 2C,I Bach 2D,I KESS 1,I KITS 1,I KMI 4,I KoSI 1;IT-Law / Data Protection Law;30.7218;GS;K;
+Woche1+2;I Bach 3,I KESS 6,I KITS 4,I KMI 3,I KoSI 4;Betriebssysteme;30.7300;;K;
+;I Bach 3,I KESS 4,I KITS 4,I KMI 3,I KoSI 4;Datenbanken 1;30.7312;;K;
+;I Bach 3,I KoSI 6;Grundlagen der Analysis;30.7314;MN;K;
+;I Bach 3,I KESS 4,I KITS 4,I KMI 3,I KoSI 4;Nutzerzentrierte Softwareentwicklung;30.7316;;K;
+;I Bach 3,I KESS 4,I KITS 4,I KMI 3,I KoSI 4;Software Engineering;30.7318;;K;
+;I Bach 4,I KMI 4,I KoSI 4;Entwicklung webbasierter Anwendungen;30.7400;;K;
+;I Bach 4,I KMI 4,I KoSI 6;Graphische Datenverarbeitung;30.7402;;K;
+Woche1+2;I Bach 4,I KITS 6,I KMI 4,I KoSI 6;Verteilte Systeme;30.7404;;K;
+;I Bach 4,I KoSI 6;Datenbanken 2;30.7406;;K;
+;I Bach 4,I KESS 6,I KITS 6,I KMI 4,I KoSI 6;Theoretische Informatik;30.7410;;K;
+;I Bach 4,I KESS 2,I KITS 2,I KMI 2,I KoSI 2;Projektmanagement;30.7506;;K;
+;I KMI 2;Multimedia Kommunikation;81.7222;;K;
+;I KESS 4;Softwareentwicklung für Embedded Systeme;83.7418;;K;
+;I KITS 2;Software-Sicherheit;84.7220;;K;
+;I KITS 4;Kryptologie;84.7412;;K;
+;I KITS 6;Netzwerksicherheit;84.7606;;K;
+;WP_Bach;Simulation von Robotersystemen;30.2260;;K;
+;WP_Bach;Genetische Algorithmen;30.2280;;K;
+Gebelein, Udo, I;WP_Bach;Grundlagen des Qualitätsmanagements;30.2318;;K;
+;WP_Bach;Einführung in die Technik und Anwendung von RFID;30.2334;;K;
+;WP_Bach;Multimedia-Netzwerke;30.2452;;K;
+;WP_Bach;Data Warehouse Technologien;30.2512;;K;
+;WP_Bach;Compiler Construction;30.2548;;K;
+Woche3;WP_Bach;Softwareentwicklung für HMI-Systeme;30.2600;;K;
+;WP_Bach;Internetworking;30.2602;;K;
+;WP_Bach;Entwicklung von Java EE-Anwendungen mit agilen Methoden;30.2604;;K;
+Sauer, Dominik, I;WP_Bach;Penetration Testing;30.2608;;K;
+;WP_Bach;Automotive Security;30.2616;;K;
+;WP_Bach;IT-Risikomanagement;84.2006;;K;
+;WP_Bach;IT-Sicherheitsmanagement;84.2008;;K;
+DataScience;WP_Mast;Big Data Technologien;41.4614;;K;
+;WP_Mast;Business Process Engineering;41.4824;;K;
+;WP_Mast;Computer Forensik;41.4832;;K;
+;WP_Mast;Codierungstheorie;41.4934;;K;
+;WP_Mast;Cryptography;41.4936;;K;
+;WP_Mast;Logik;41.4970;;K;
+;WP_Mast;Cloud-Computing Technologies;41.4982;;K;
+DataScience;WP_Mast;Big Data Analytics;41.4984;;K;
+DataScience;WP_Mast;Biometric Systems;41.5028;;K;
+;WP_Mast;Data Mining;41.5036;;K;
+;WP_Mast;Interaktive Entscheidungstheorie (Spieltheorie);41.5038;;K;
+;WP_Mast;Advanced Internetworking;41.5046;;K;
+;WP_Mast;Computer Vision;41.5048;;K;
+// implizit;WP_Mast;Network Simulation;41.5050;;-;
+// EIT;I KESS 2;Messtechnik und intelligente Sensorik;83.7224;EIT;K;
+// EIT;I KESS 6;Industrielle Datenkommunikation;83.7604;EIT;K;
+// EIT;I KESS 6;Signal- und Messwertverarbeitung;83.7610;EIT;K;
