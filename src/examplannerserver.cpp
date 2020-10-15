@@ -7,12 +7,12 @@ ExamPlannerServer::ExamPlannerServer(const QString& publicKey, QObject *parent) 
 {
     if(plans.isUndefined() || plans.isNull()){
 
-        CsvLoader loader;
-        Plan* plan = loader.loadPlan();
+        PlanCsvHelper helper("../pruefungsplaner-backend/res/");
+        QSharedPointer<Plan> plan = helper.readPlan();
         plan->setName("Plan A");
 
         QList<Plan*> newPlans;
-        newPlans.append(plan);
+        newPlans.append(plan.get());
 
         Semester* semester = new Semester();
         semester->setName("WS 2019");

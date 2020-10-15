@@ -16,8 +16,7 @@
 #include "semester.h"
 #include "timeslot.h"
 #include "week.h"
-
-#include "csvloader.h"
+#include <plancsvhelper.h>
 
 #include <jwt-cpp/jwt.h>
 
