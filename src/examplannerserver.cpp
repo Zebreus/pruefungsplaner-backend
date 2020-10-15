@@ -8,22 +8,27 @@ ExamPlannerServer::ExamPlannerServer(const QString& publicKey, QObject *parent) 
     if(plans.isUndefined() || plans.isNull()){
 
         PlanCsvHelper helper("../pruefungsplaner-backend/res/");
+        system("ls ../pruefungsplaner-backend/res/");
         QSharedPointer<Plan> plan = helper.readPlan();
-        plan->setName("Plan A");
+        if(plan != nullptr){
+            plan->setName("Plan A");
 
-        QList<Plan*> newPlans;
-        newPlans.append(plan.get());
+            QList<Plan*> newPlans;
+            newPlans.append(plan.get());
 
-        Semester* semester = new Semester();
-        semester->setName("WS 2019");
-        plan->setParent(semester);
-        semester->setPlans(newPlans);
+            Semester* semester = new Semester();
+            semester->setName("WS 2019");
+            plan->setParent(semester);
+            semester->setPlans(newPlans);
 
-        QJsonArray arr;
-        QJsonValue semesterValue = semester->toJsonObject();
-        arr.append(semesterValue);
+            QJsonArray arr;
+            QJsonValue semesterValue = semester->toJsonObject();
+            arr.append(semesterValue);
 
-        plans = QJsonValue(arr);
+            plans = QJsonValue(arr);
+        }else{
+            qDebug() << "Failed to read plan from ../pruefungsplaner-backend/res/.";
+        }
     }
 }
 
