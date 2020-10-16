@@ -20,23 +20,85 @@
 
 #include <jwt-cpp/jwt.h>
 
+#include <QMutex>
 #include "src/QtJsonTraits.h"
 
 class BackendService : public QObject {
   Q_OBJECT
 
  public:
-  explicit BackendService(const QString& publicKey,
-                             QObject* parent = nullptr);
+  /**
+   *  @brief Create a  BackendService object
+   *  @param [in] publicKey is the RSA256 public key of the securityprovider
+   *  @param [in] parent is the parent of this QObject
+   */
+  explicit BackendService(const QString& publicKey, QObject* parent = nullptr);
+
+  /**
+   *  @brief Destroys this object and makes the BackendService accesible again
+   *
+   *  Destroys this object and makes the BackendService accesible again
+   */
+  ~BackendService();
 
  public slots:
+  /**
+   *  @brief Check if the BackendService is can be accesssed
+   *  @return True if the Backend is ready
+   *
+   *  The current implementation of BackendService supports only one client
+   * simultaneously. This function can be used to check if no other client is
+   * using it. If Backend service is not ready, login will always fail.
+   */
+  bool ready();
+
+  /**
+   *  @brief Authorize the connection
+   *  @param [in] token is a json web token signed by the securityprovider
+   *  @return True if BackendService is ready and the token is valid.
+   *
+   *  Authorize the connection to the BackendService. token needs to be issued
+   * and signed by the securityprovider and contains the claims
+   * 'pruefungsplanerRead' and 'pruefungsplanerWrite' with the value 'true'.
+   * This function will always returns false if the BackendService is not ready.
+   * If this BackendService instance is already authorized it will return true.
+   */
   bool login(QString token);
-  QJsonValue getPlans();
-  void setPlans(QJsonValue newplans);
+
+  /**
+   *  @brief Get all semesters and plans
+   *  @return A QJsonValue containing a array of Semester objects
+   *
+   *  Get all semesters as a QJsonValue. The result is a json array containing
+   * objects that can be parsed into Semester objects.
+   */
+  QJsonValue getSemesters();
+
+  /**
+   *  @brief Stores the semesters
+   *  @param [in] semesters is a List of all semesters that should be stored.
+   *  @return true if the semesters were stored
+   *
+   *  Replaces the stored semesters with semesters.
+   */
+  bool setSemesters(QJsonArray semesters);
 
  private:
-  static QJsonValue plans;
+  /**
+   *  @brief Checks if token is signed and valid
+   *  @param [in] token is a json web token signed by the securityprovider
+   *  @return True if the token is signed and valid
+   */
+  bool verifyToken(const QString& token);
+
+ private:
+  static inline QMutex accessMutex;
+  static inline QJsonValue semesters;
   QString publicKey;
+  /**
+   *  @brief Stores if this BackendService instance is authorized
+   *  If the instance is authorized it also locks accessMutex
+   */
   bool authorized;
 };
 

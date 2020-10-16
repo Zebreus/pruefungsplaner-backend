@@ -1,10 +1,9 @@
 #include "backendservice.h"
 
-QJsonValue BackendService::plans = QJsonValue();
-
 BackendService::BackendService(const QString& publicKey, QObject* parent)
     : QObject(parent), publicKey(publicKey), authorized(false) {
-  if (plans.isUndefined() || plans.isNull()) {
+  // Load plans if not initialized yet
+  if (semesters.isUndefined() || semesters.isNull()) {
     PlanCsvHelper helper("../pruefungsplaner-backend/res/");
     system("ls ../pruefungsplaner-backend/res/");
     QSharedPointer<Plan> plan = helper.readPlan();
@@ -23,14 +22,62 @@ BackendService::BackendService(const QString& publicKey, QObject* parent)
       QJsonValue semesterValue = semester->toJsonObject();
       arr.append(semesterValue);
 
-      plans = QJsonValue(arr);
+      semesters = QJsonValue(arr);
     } else {
       qDebug() << "Failed to read plan from ../pruefungsplaner-backend/res/.";
     }
   }
 }
 
+BackendService::~BackendService() {
+  if (authorized) {
+    accessMutex.unlock();
+  }
+}
+
+bool BackendService::ready() {
+  if (accessMutex.tryLock(0)) {
+    accessMutex.unlock();
+    return true;
+  } else {
+    return false;
+  }
+}
+
 bool BackendService::login(QString token) {
+  if (authorized) {
+    return true;
+  }
+
+  if (accessMutex.tryLock(0)) {
+    if (verifyToken(token)) {
+      authorized = true;
+      return true;
+    }
+    accessMutex.unlock();
+  }
+
+  return false;
+}
+
+QJsonValue BackendService::getSemesters() {
+  if (authorized) {
+    return semesters;
+  } else {
+    return QJsonValue::Undefined;
+  }
+}
+
+bool BackendService::setSemesters(QJsonArray semesters) {
+  if (authorized) {
+    this->semesters = semesters;
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool BackendService::verifyToken(const QString& token) {
   try {
     auto verifier =
         jwt::verifier<jwt::default_clock, QtJsonTraits>(jwt::default_clock{})
@@ -47,21 +94,15 @@ bool BackendService::login(QString token) {
 
     verifier.verify(decodedToken);
 
-    authorized = true;
     qDebug() << "User " << decodedToken.get_subject()
              << " logged in with valid token";
     return true;
   } catch (std::runtime_error& e) {
-    authorized = false;
     qDebug() << "Invalid token";
     return false;
+  } catch (...) {
+    qDebug() << "Unexpected exception thrown in BackendService::verifyToken. "
+                "This should not happen.";
+    return false;
   }
-}
-
-QJsonValue BackendService::getPlans() {
-  return plans;
-}
-
-void BackendService::setPlans(QJsonValue newplans) {
-  plans = newplans;
 }
