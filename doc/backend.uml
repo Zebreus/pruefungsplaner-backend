@@ -58,7 +58,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Oct 16 13:27:11 CEST 2020'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Oct 16 14:02:30 CEST 2020'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.35.1(6) revised on $Date: 2012-12-30 14:06:01 +0100 (Sun, 30 Dec 2012) $ </XMI.exporterVersion>
@@ -102,7 +102,7 @@
 @param [in] token is a json web token signed by the securityprovider
 @return True if BackendService is ready and the token is valid.
 
-Authorize the connection to the BackendService. token needs to be issued and signed by the securityprovider and contains the claims &apos;pruefungsplanerRead&apos; and &apos;pruefungsplanerWrite&apos; with the value &apos;true&apos;. This function will always returns false if the BackendService is not ready.</UML:TaggedValue.dataValue>
+Authorize the connection to the BackendService. token needs to be issued and signed by the securityprovider and contains the claims &apos;pruefungsplanerRead&apos; and &apos;pruefungsplanerWrite&apos; with the value &apos;true&apos;. This function will always returns false if the BackendService is not ready. If this BackendService instance is already authorized it will return true.</UML:TaggedValue.dataValue>
                   <UML:TaggedValue.type>
                     <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
                   </UML:TaggedValue.type>
@@ -240,6 +240,16 @@ The current implementation of BackendService supports only one client simultaneo
                   </UML:Multiplicity.range>
                 </UML:Multiplicity>
               </UML:StructuralFeature.multiplicity>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009A5'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>@brief Stores if this BackendService instance is authorized
+If the instance is authorized it also locks accesMutex</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
               <UML:StructuralFeature.type>
                 <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000096F'/>
               </UML:StructuralFeature.type>
@@ -295,7 +305,7 @@ Replaces the stored semesters with semesters.</UML:TaggedValue.dataValue>
               </UML:BehavioralFeature.parameter>
             </UML:Operation>
             <UML:Operation xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000996'
-              name = 'BackendService' visibility = 'package' isSpecification = 'false'
+              name = 'BackendService' visibility = 'public' isSpecification = 'false'
               ownerScope = 'instance' isQuery = 'false' concurrency = 'sequential' isRoot = 'false'
               isLeaf = 'false' isAbstract = 'false'>
               <UML:ModelElement.stereotype>
@@ -315,6 +325,36 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
               <UML:BehavioralFeature.parameter>
                 <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000997'
                   name = 'return' isSpecification = 'false' kind = 'return'/>
+              </UML:BehavioralFeature.parameter>
+            </UML:Operation>
+            <UML:Operation xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009A6'
+              name = 'verifyToken' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
+              isQuery = 'false' concurrency = 'sequential' isRoot = 'false' isLeaf = 'false'
+              isAbstract = 'false'>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009A9'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>@brief Checks if token is signed and valid
+@param [in] token is a json web token signed by the securityprovider
+@return True if the token is signed and valid</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
+              <UML:BehavioralFeature.parameter>
+                <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009A7'
+                  name = 'return' isSpecification = 'false' kind = 'return'>
+                  <UML:Parameter.type>
+                    <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000096F'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009A8'
+                  name = 'token' isSpecification = 'false' kind = 'in'>
+                  <UML:Parameter.type>
+                    <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000096E'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
               </UML:BehavioralFeature.parameter>
             </UML:Operation>
           </UML:Classifier.feature>
@@ -435,7 +475,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       strokecolor="black"
     />
     <group name="Fig0.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[209, 72, 429, 103]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[209, 72, 429, 95]"
          href="-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000962"
          fill="0"
          fillcolor="white"
@@ -449,7 +489,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
         x="209"
         y="72"
         width="429"
-        height="103"
+        height="95"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -522,7 +562,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
     </group>
     <rectangle name="Fig0.5"
       x="208"
-      y="175"
+      y="167"
       width="431"
       height="1"
       fill="1"
@@ -531,7 +571,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       strokecolor="black"
     />
     <group name="Fig0.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[209, 176, 429, 135]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[209, 168, 429, 143]"
          href="-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000962"
          fill="0"
          fillcolor="white"
@@ -543,9 +583,9 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       
       <rectangle name="Fig0.6.0"
         x="209"
-        y="176"
+        y="168"
         width="429"
-        height="135"
+        height="143"
         fill="0"
         fillcolor="white"
         stroke="0"
@@ -553,7 +593,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       />
       <text name="Fig0.6.1"
         x="209"
-        y="176"
+        y="168"
         width="429"
         height="16"
         fill="0"
@@ -569,7 +609,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       >&lt;&lt;slot&gt;&gt; login(token : QString) : bool</text>
       <text name="Fig0.6.2"
         x="209"
-        y="192"
+        y="184"
         width="429"
         height="16"
         fill="0"
@@ -585,7 +625,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       >&lt;&lt;create&gt;&gt; BackendService(publicKey : QString,parent : QObject*)</text>
       <text name="Fig0.6.3"
         x="209"
-        y="208"
+        y="200"
         width="429"
         height="16"
         fill="0"
@@ -601,7 +641,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       >&lt;&lt;slot&gt;&gt; getSemesters() : QJsonValue</text>
       <text name="Fig0.6.4"
         x="209"
-        y="224"
+        y="216"
         width="429"
         height="16"
         fill="0"
@@ -617,7 +657,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       >&lt;&lt;slot&gt;&gt; ready() : bool</text>
       <text name="Fig0.6.5"
         x="209"
-        y="240"
+        y="232"
         width="429"
         height="16"
         fill="0"
@@ -633,7 +673,23 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       >&lt;&lt;slot&gt;&gt; setSemesters(semesters : QJsonArray) : bool</text>
       <text name="Fig0.6.6"
         x="209"
-        y="256"
+        y="248"
+        width="429"
+        height="16"
+        fill="0"
+        fillcolor="white"
+        stroke="0"
+        strokecolor="black"
+        textcolor="black"
+        font="Dialog"
+        italic="false"
+        bold="false"
+        textsize="12"
+        justification="Left"
+      >&lt;&lt;destroy&gt;&gt; BackendService()</text>
+      <text name="Fig0.6.7"
+        x="209"
+        y="264"
         width="429"
         height="22"
         fill="0"
@@ -646,7 +702,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;destroy&gt;&gt; BackendService()</text>
+      >verifyToken(token : QString) : bool</text>
     </group>
   </group>
 </pgml>
