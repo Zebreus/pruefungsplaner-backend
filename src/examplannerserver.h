@@ -4,11 +4,12 @@
 #include <QObject>
 #include <QThread>
 
-#include <QJsonValue>
 #include <QJsonArray>
-#include <QJsonObject>
 #include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
 
+#include <plancsvhelper.h>
 #include "day.h"
 #include "group.h"
 #include "module.h"
@@ -16,27 +17,27 @@
 #include "semester.h"
 #include "timeslot.h"
 #include "week.h"
-#include <plancsvhelper.h>
 
 #include <jwt-cpp/jwt.h>
 
 #include "src/QtJsonTraits.h"
 
-class ExamPlannerServer : public QObject
-{
-    Q_OBJECT
-private:
-    static QJsonValue plans;
-    QString publicKey;
-    bool authorized;
+class ExamPlannerServer : public QObject {
+  Q_OBJECT
 
-public:
-    explicit ExamPlannerServer(const QString& publicKey, QObject *parent = nullptr);
+ public:
+  explicit ExamPlannerServer(const QString& publicKey,
+                             QObject* parent = nullptr);
 
-public slots:
-    bool login(QString token);
-    QJsonValue getPlans();
-    void setPlans(QJsonValue newplans);
+ public slots:
+  bool login(QString token);
+  QJsonValue getPlans();
+  void setPlans(QJsonValue newplans);
+
+ private:
+  static QJsonValue plans;
+  QString publicKey;
+  bool authorized;
 };
 
-#endif // EXAMPLANNERSERVER_H
+#endif  // EXAMPLANNERSERVER_H
