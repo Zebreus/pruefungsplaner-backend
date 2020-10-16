@@ -1,9 +1,10 @@
 #include "backendservice.h"
 
-BackendService::BackendService(const QString& publicKey, QObject* parent)
-    : QObject(parent), publicKey(publicKey), authorized(false) {
+BackendService::BackendService(QSharedPointer<QJsonValue> semesters,
+                               QSharedPointer<QMutex> accessMutex, const QString& publicKey, QObject* parent)
+    : QObject(parent), semesters(semesters), accessMutex(accessMutex), publicKey(publicKey), authorized(false) {
   // Load plans if not initialized yet
-  if (semesters.isUndefined() || semesters.isNull()) {
+  if (semesters->isUndefined() || semesters->isNull()) {
     PlanCsvHelper helper("../pruefungsplaner-backend/res/");
     system("ls ../pruefungsplaner-backend/res/");
     QSharedPointer<Plan> plan = helper.readPlan();
@@ -22,7 +23,7 @@ BackendService::BackendService(const QString& publicKey, QObject* parent)
       QJsonValue semesterValue = semester->toJsonObject();
       arr.append(semesterValue);
 
-      semesters = QJsonValue(arr);
+      *semesters = QJsonValue(arr);
     } else {
       qDebug() << "Failed to read plan from ../pruefungsplaner-backend/res/.";
     }
@@ -31,13 +32,13 @@ BackendService::BackendService(const QString& publicKey, QObject* parent)
 
 BackendService::~BackendService() {
   if (authorized) {
-    accessMutex.unlock();
+    accessMutex->unlock();
   }
 }
 
 bool BackendService::ready() {
-  if (accessMutex.tryLock(0)) {
-    accessMutex.unlock();
+  if (accessMutex->tryLock(0)) {
+    accessMutex->unlock();
     return true;
   } else {
     return false;
@@ -49,12 +50,12 @@ bool BackendService::login(QString token) {
     return true;
   }
 
-  if (accessMutex.tryLock(0)) {
+  if (accessMutex->tryLock(0)) {
     if (verifyToken(token)) {
       authorized = true;
       return true;
     }
-    accessMutex.unlock();
+    accessMutex->unlock();
   }
 
   return false;
@@ -62,7 +63,7 @@ bool BackendService::login(QString token) {
 
 QJsonValue BackendService::getSemesters() {
   if (authorized) {
-    return semesters;
+    return *semesters;
   } else {
     return QJsonValue::Undefined;
   }
@@ -70,7 +71,7 @@ QJsonValue BackendService::getSemesters() {
 
 bool BackendService::setSemesters(QJsonArray semesters) {
   if (authorized) {
-    this->semesters = semesters;
+    *this->semesters = semesters;
     return true;
   } else {
     return false;

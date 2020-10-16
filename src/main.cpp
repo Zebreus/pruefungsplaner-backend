@@ -5,12 +5,15 @@
 
 jsonrpc::Server<BackendService> server(9093);
 QString publicKey;
+QSharedPointer<QMutex> backendServiceMutex(new QMutex());
+QSharedPointer<QJsonValue> backendServiceSemesters(new QJsonValue());
 
 void startServerWithKey(const QString& key) {
   publicKey = key;
   qDebug() << "Got Public key from securityProvider";
   qDebug() << "Starting server";
-  server.setConstructorArguments(publicKey);
+  server.setConstructorArguments(backendServiceSemesters, backendServiceMutex,
+                                 publicKey);
   server.startListening();
 }
 

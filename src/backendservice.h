@@ -32,7 +32,10 @@ class BackendService : public QObject {
    *  @param [in] publicKey is the RSA256 public key of the securityprovider
    *  @param [in] parent is the parent of this QObject
    */
-  explicit BackendService(const QString& publicKey, QObject* parent = nullptr);
+  explicit BackendService(QSharedPointer<QJsonValue> semesters,
+                          QSharedPointer<QMutex> accessMutex,
+                          const QString& publicKey,
+                          QObject* parent = nullptr);
 
   /**
    *  @brief Destroys this object and makes the BackendService accesible again
@@ -92,8 +95,8 @@ class BackendService : public QObject {
   bool verifyToken(const QString& token);
 
  private:
-  static inline QMutex accessMutex;
-  static inline QJsonValue semesters;
+  QSharedPointer<QJsonValue> semesters;
+  QSharedPointer<QMutex> accessMutex;
   QString publicKey;
   /**
    *  @brief Stores if this BackendService instance is authorized

@@ -58,7 +58,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Oct 16 14:02:30 CEST 2020'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Oct 16 14:25:49 CEST 2020'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.35.1(6) revised on $Date: 2012-12-30 14:06:01 +0100 (Sun, 30 Dec 2012) $ </XMI.exporterVersion>
@@ -74,7 +74,7 @@
           isRoot = 'false' isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
           <UML:Classifier.feature>
             <UML:Attribute xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000968'
-              name = 'semesters' visibility = 'private' isSpecification = 'false' ownerScope = 'classifier'
+              name = 'semesters' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
               changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000969'>
@@ -85,7 +85,7 @@
                 </UML:Multiplicity>
               </UML:StructuralFeature.multiplicity>
               <UML:StructuralFeature.type>
-                <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000097A'/>
+                <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009AA'/>
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Operation xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000096B'
@@ -145,12 +145,24 @@ Authorize the connection to the BackendService. token needs to be issued and sig
                 <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000971'
                   name = 'return' isSpecification = 'false' kind = 'return'/>
                 <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000972'
+                  name = 'semesters' isSpecification = 'false' kind = 'in'>
+                  <UML:Parameter.type>
+                    <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009AA'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000973'
+                  name = 'accessMutex' isSpecification = 'false' kind = 'in'>
+                  <UML:Parameter.type>
+                    <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009AB'/>
+                  </UML:Parameter.type>
+                </UML:Parameter>
+                <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009AC'
                   name = 'publicKey' isSpecification = 'false' kind = 'in'>
                   <UML:Parameter.type>
                     <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000096E'/>
                   </UML:Parameter.type>
                 </UML:Parameter>
-                <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000973'
+                <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009AD'
                   name = 'parent' isSpecification = 'false' kind = 'in'>
                   <UML:Parameter.type>
                     <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000974'/>
@@ -255,7 +267,7 @@ If the instance is authorized it also locks accesMutex</UML:TaggedValue.dataValu
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Attribute xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000098F'
-              name = 'accessMutex' visibility = 'private' isSpecification = 'false' ownerScope = 'classifier'
+              name = 'accessMutex' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
               changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000990'>
@@ -266,7 +278,7 @@ If the instance is authorized it also locks accesMutex</UML:TaggedValue.dataValu
                 </UML:Multiplicity>
               </UML:StructuralFeature.multiplicity>
               <UML:StructuralFeature.type>
-                <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000992'/>
+                <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009AB'/>
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Operation xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000993'
@@ -396,6 +408,12 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
             </UML:Multiplicity>
           </UML:TagDefinition.multiplicity>
         </UML:TagDefinition>
+        <UML:Class xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009AA'
+          name = 'QSharedPointer&lt;QJsonValue&gt;' visibility = 'public' isSpecification = 'false'
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false' isActive = 'false'/>
+        <UML:Class xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009AB'
+          name = 'QSharedPointer&lt;QMutex&gt;' visibility = 'public' isSpecification = 'false'
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false' isActive = 'false'/>
       </UML:Namespace.ownedElement>
     </UML:Model>
   </XMI.content>
@@ -405,7 +423,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       name="Klassendiagramm"
 >
   <group name="Fig0"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[208, 48, 431, 264]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[208, 48, 964, 264]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000962"
        fill="1"
        fillcolor="white"
@@ -418,7 +436,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
     <rectangle name="Fig0.0"
       x="208"
       y="48"
-      width="431"
+      width="964"
       height="264"
       fill="1"
       fillcolor="white"
@@ -428,7 +446,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
     <text name="Fig0.1"
       x="209"
       y="49"
-      width="429"
+      width="962"
       height="22"
       fill="0"
       fillcolor="white"
@@ -467,7 +485,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
     <rectangle name="Fig0.3"
       x="208"
       y="71"
-      width="431"
+      width="964"
       height="1"
       fill="1"
       fillcolor="black"
@@ -475,7 +493,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       strokecolor="black"
     />
     <group name="Fig0.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[209, 72, 429, 95]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[209, 72, 962, 95]"
          href="-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000962"
          fill="0"
          fillcolor="white"
@@ -488,7 +506,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <rectangle name="Fig0.4.0"
         x="209"
         y="72"
-        width="429"
+        width="962"
         height="95"
         fill="0"
         fillcolor="white"
@@ -498,7 +516,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <text name="Fig0.4.1"
         x="209"
         y="72"
-        width="429"
+        width="962"
         height="16"
         fill="0"
         fillcolor="white"
@@ -510,11 +528,11 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
         bold="false"
         textsize="12"
         justification="Left"
-      >semesters : QJsonValue</text>
+      >semesters : QSharedPointer&lt;QJsonValue&gt;</text>
       <text name="Fig0.4.2"
         x="209"
         y="88"
-        width="429"
+        width="962"
         height="16"
         fill="0"
         fillcolor="white"
@@ -530,7 +548,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <text name="Fig0.4.3"
         x="209"
         y="104"
-        width="429"
+        width="962"
         height="16"
         fill="0"
         fillcolor="white"
@@ -546,7 +564,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <text name="Fig0.4.4"
         x="209"
         y="120"
-        width="429"
+        width="962"
         height="22"
         fill="0"
         fillcolor="white"
@@ -558,12 +576,12 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
         bold="false"
         textsize="12"
         justification="Left"
-      >accessMutex : QMutex</text>
+      >accessMutex : QSharedPointer&lt;QMutex&gt;</text>
     </group>
     <rectangle name="Fig0.5"
       x="208"
       y="167"
-      width="431"
+      width="964"
       height="1"
       fill="1"
       fillcolor="black"
@@ -571,7 +589,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       strokecolor="black"
     />
     <group name="Fig0.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[209, 168, 429, 143]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[209, 168, 962, 143]"
          href="-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000962"
          fill="0"
          fillcolor="white"
@@ -584,7 +602,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <rectangle name="Fig0.6.0"
         x="209"
         y="168"
-        width="429"
+        width="962"
         height="143"
         fill="0"
         fillcolor="white"
@@ -594,7 +612,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <text name="Fig0.6.1"
         x="209"
         y="168"
-        width="429"
+        width="962"
         height="16"
         fill="0"
         fillcolor="white"
@@ -610,7 +628,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <text name="Fig0.6.2"
         x="209"
         y="184"
-        width="429"
+        width="962"
         height="16"
         fill="0"
         fillcolor="white"
@@ -622,11 +640,11 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;create&gt;&gt; BackendService(publicKey : QString,parent : QObject*)</text>
+      >&lt;&lt;create&gt;&gt; BackendService(semesters : QSharedPointer&lt;QJsonValue&gt;,accessMutex : QSharedPointer&lt;QMutex&gt;,publicKey : QString,parent : QObject*)</text>
       <text name="Fig0.6.3"
         x="209"
         y="200"
-        width="429"
+        width="962"
         height="16"
         fill="0"
         fillcolor="white"
@@ -642,7 +660,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <text name="Fig0.6.4"
         x="209"
         y="216"
-        width="429"
+        width="962"
         height="16"
         fill="0"
         fillcolor="white"
@@ -658,7 +676,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <text name="Fig0.6.5"
         x="209"
         y="232"
-        width="429"
+        width="962"
         height="16"
         fill="0"
         fillcolor="white"
@@ -674,7 +692,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <text name="Fig0.6.6"
         x="209"
         y="248"
-        width="429"
+        width="962"
         height="16"
         fill="0"
         fillcolor="white"
@@ -690,7 +708,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <text name="Fig0.6.7"
         x="209"
         y="264"
-        width="429"
+        width="962"
         height="22"
         fill="0"
         fillcolor="white"
