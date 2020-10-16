@@ -84,14 +84,26 @@ bool BackendService::verifyToken(const QString& token) {
         jwt::verifier<jwt::default_clock, QtJsonTraits>(jwt::default_clock{})
             .with_claim("pruefungsplanerRead",
                         jwt::basic_claim<QtJsonTraits>(QString("true")))
-            .with_claim("pruefungsplanerRead",
+            .with_claim("pruefungsplanerWrite",
                         jwt::basic_claim<QtJsonTraits>(QString("true")))
             .allow_algorithm(jwt::algorithm::rs256(
                 publicKey.toUtf8().constData(), "", "", ""))
             .with_audience(QJsonArray{"pruefungsplaner-backend"})
-            .with_issuer("securityprovider");
+            .with_issuer("securityprovider")
+            .issued_at_leeway(0)
+            .not_before_leeway(0)
+            .expires_at_leeway(0)
+            .leeway(0);
 
     auto decodedToken = jwt::decode<QtJsonTraits>(token);
+
+    if(!decodedToken.has_expires_at()){
+        throw std::runtime_error("Missing exp");
+    }
+
+    if(!decodedToken.has_issued_at()){
+        throw std::runtime_error("Missing iat");
+    }
 
     verifier.verify(decodedToken);
 
@@ -106,4 +118,5 @@ bool BackendService::verifyToken(const QString& token) {
                 "This should not happen.";
     return false;
   }
+    return false;
 }
