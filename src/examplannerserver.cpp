@@ -32,17 +32,6 @@ ExamPlannerServer::ExamPlannerServer(const QString& publicKey, QObject *parent) 
     }
 }
 
-void ExamPlannerServer::finishedPlanning(Plan *finishedPlan)
-{
-    QJsonObject finPlan = finishedPlan->toJsonObject();
-    plannerPlan = finPlan;
-}
-
-void ExamPlannerServer::progressChanged(int progress)
-{
-    plannerProgress = progress;
-}
-
 bool ExamPlannerServer::login(QString token)
 {
     try{
@@ -75,36 +64,4 @@ QJsonValue ExamPlannerServer::getPlans()
 void ExamPlannerServer::setPlans(QJsonValue newplans)
 {
     plans = newplans;
-}
-
-void ExamPlannerServer::startPlanning(QJsonValue plan)
-{
-    Plan* p = new Plan();
-    p->fromJsonObject(plan.toObject());
-
-    ExamPlanner *worker = new ExamPlanner(nullptr, p);
-    worker->moveToThread(&examPlannerThread);
-    connect(&examPlannerThread, &QThread::finished, worker, &QObject::deleteLater);
-    connect(&examPlannerThread, &QThread::finished, [](){qDebug("Thread finished");});
-    connect(worker, &ExamPlanner::finishedPlanning, this, &ExamPlannerServer::finishedPlanning);
-    connect(worker, &ExamPlanner::progressChanged, this, &ExamPlannerServer::progressChanged);
-    QMetaObject::invokeMethod( worker, "startPlanning", Qt::QueuedConnection );
-    examPlannerThread.start();
-
-}
-
-void ExamPlannerServer::startPlanningTest()
-{
-    QJsonValue plan = plans.toArray().at(0).toObject().value("plans").toArray().at(0);
-    startPlanning(plan);
-}
-
-int ExamPlannerServer::getPlanningProgress()
-{
-    return plannerProgress;
-}
-
-QJsonValue ExamPlannerServer::getPlannedPlan()
-{
-    return plannerPlan;
 }

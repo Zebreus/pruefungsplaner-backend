@@ -2,7 +2,6 @@
 #include "server.h"
 #include "src/examplannerserver.h"
 #include "security-provider/client.h"
-#include "csvloader.h"
 
 jsonrpc::Server<ExamPlannerServer> server(9093);
 QString publicKey;
@@ -30,6 +29,5 @@ int main(int argc, char *argv[])
     QObject::connect(&client, &securityprovider::Client::socketError, providerError);
     client.open(QUrl("ws://localhost:9092"));
     client.getPublicKey();
-//    CsvLoader();
     return a.exec();
 }
