@@ -120,8 +120,8 @@ class BackendServiceTests : public ::testing::Test {
     }
 
     return tokenBuilder.sign(
-        jwt::algorithm::rs256(publicKey1.toUtf8().constData(),
-                              privateKey1.toUtf8().constData(), "", ""));
+        jwt::algorithm::rs256("",
+                              key.toUtf8().constData(), "", ""));
   }
 
   QString privateKey1;
@@ -373,6 +373,23 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
                              jwt::basic_claim<QtJsonTraits>(QString("true")));
   EXPECT_FALSE(backend.login(signToken(tokenBuilder)))
       << "Backend service accepted token with no subject";
+
+  // Signed with wrong key
+  tokenBuilder =
+      jwt::create<QtJsonTraits>()
+          .set_type("JWT")
+          .set_issuer("securityprovider")
+          .set_audience(QJsonArray{"pruefungsplaner-backend"})
+          .set_subject("test")
+          .set_issued_at(std::chrono::system_clock::now())
+          .set_expires_at(std::chrono::system_clock::now() +
+                          std::chrono::seconds{3600})
+          .set_payload_claim("pruefungsplanerRead",
+                             jwt::basic_claim<QtJsonTraits>(QString("trure")))
+          .set_payload_claim("pruefungsplanerWrite",
+                             jwt::basic_claim<QtJsonTraits>(QString("true")));
+  EXPECT_FALSE(backend.login(signToken(tokenBuilder, privateKey2)))
+      << "Backend service accepted token signed by wrong key";
 }
 
 TEST_F(BackendServiceTests, loginFailsWhenNotReady) {
