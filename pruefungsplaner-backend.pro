@@ -1,7 +1,7 @@
 QT -= gui
 QT += websockets
 
-CONFIG += c++11 console
+CONFIG += c++17 console
 CONFIG -= app_bundle
 
 include($$PWD/libs/pruefungsplaner-datamodel/pruefungsplaner-datamodel.pri)
@@ -24,6 +24,26 @@ HEADERS += \
         src/backendservice.h
 
 LIBS += -lcrypto
+
+test{
+    include($$PWD/libs/gtest/gtest_dependency.pri)
+
+    QT *= testlib
+    TEMPLATE = app
+    TARGET = pruefungsplaner-backend-tests
+    INCLUDEPATH *= $$PWD/src
+
+    CONFIG *= thread
+    LIBS *= -lgtest -lgtest_main
+
+    SOURCES -= src/main.cpp
+    SOURCES += tests/qthelper.cpp \
+            tests/backendservicetest.cpp
+}
+else{
+    TEMPLATE = app
+    TARGET = pruefungsplaner-backend
+}
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
