@@ -58,7 +58,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Oct 16 12:35:22 CEST 2020'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Oct 16 13:27:11 CEST 2020'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.35.1(6) revised on $Date: 2012-12-30 14:06:01 +0100 (Sun, 30 Dec 2012) $ </XMI.exporterVersion>
@@ -74,7 +74,7 @@
           isRoot = 'false' isLeaf = 'false' isAbstract = 'false' isActive = 'false'>
           <UML:Classifier.feature>
             <UML:Attribute xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000968'
-              name = 'semesters' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
+              name = 'semesters' visibility = 'private' isSpecification = 'false' ownerScope = 'classifier'
               changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000969'>
@@ -95,6 +95,19 @@
               <UML:ModelElement.stereotype>
                 <UML:Stereotype xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000998'/>
               </UML:ModelElement.stereotype>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009A0'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>@brief Authorize the connection
+@param [in] token is a json web token signed by the securityprovider
+@return True if BackendService is ready and the token is valid.
+
+Authorize the connection to the BackendService. token needs to be issued and signed by the securityprovider and contains the claims &apos;pruefungsplanerRead&apos; and &apos;pruefungsplanerWrite&apos; with the value &apos;true&apos;. This function will always returns false if the BackendService is not ready.</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
               <UML:BehavioralFeature.parameter>
                 <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000096C'
                   name = 'return' isSpecification = 'false' kind = 'return'>
@@ -117,6 +130,17 @@
               <UML:ModelElement.stereotype>
                 <UML:Stereotype href = 'http://argouml.org/profiles/uml14/default-uml14.xmi#.:000000000000082B'/>
               </UML:ModelElement.stereotype>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009A1'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>@brief Create a  BackendService object
+@param [in] publicKey is the RSA256 public key of the securityprovider
+@param [in] parent is the parent of this QObject</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
               <UML:BehavioralFeature.parameter>
                 <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000971'
                   name = 'return' isSpecification = 'false' kind = 'return'/>
@@ -141,6 +165,18 @@
               <UML:ModelElement.stereotype>
                 <UML:Stereotype xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000998'/>
               </UML:ModelElement.stereotype>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000099C'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>@brief Get all semesters and plans
+@return A QJsonValue containing a array of Semester objects
+
+Get all semesters as a QJsonValue. The result is a json array containing objects that can be parsed into Semester objects.</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
               <UML:BehavioralFeature.parameter>
                 <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000976'
                   name = 'return' isSpecification = 'false' kind = 'return'>
@@ -157,6 +193,18 @@
               <UML:ModelElement.stereotype>
                 <UML:Stereotype xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000998'/>
               </UML:ModelElement.stereotype>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000099D'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>@brief Check if the BackendService is can be accesssed
+@return True if the Backend is ready
+
+The current implementation of BackendService supports only one client simultaneously. This function can be used to check if no other client is using it. If Backend service is not ready, login will always fail.</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
               <UML:BehavioralFeature.parameter>
                 <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000984'
                   name = 'return' isSpecification = 'false' kind = 'return'>
@@ -197,7 +245,7 @@
               </UML:StructuralFeature.type>
             </UML:Attribute>
             <UML:Attribute xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000098F'
-              name = 'accessMutex' visibility = 'private' isSpecification = 'false' ownerScope = 'instance'
+              name = 'accessMutex' visibility = 'private' isSpecification = 'false' ownerScope = 'classifier'
               changeability = 'changeable' targetScope = 'instance'>
               <UML:StructuralFeature.multiplicity>
                 <UML:Multiplicity xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000990'>
@@ -218,6 +266,19 @@
               <UML:ModelElement.stereotype>
                 <UML:Stereotype xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000998'/>
               </UML:ModelElement.stereotype>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000099F'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>@brief Stores the semesters
+@param [in] semesters is a List of all semesters that should be stored.
+@return true if the semesters were stored
+
+Replaces the stored semesters with semesters.</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
               <UML:BehavioralFeature.parameter>
                 <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000994'
                   name = 'return' isSpecification = 'false' kind = 'return'>
@@ -228,7 +289,7 @@
                 <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000995'
                   name = 'semesters' isSpecification = 'false' kind = 'in'>
                   <UML:Parameter.type>
-                    <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000097A'/>
+                    <UML:Class xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000977'/>
                   </UML:Parameter.type>
                 </UML:Parameter>
               </UML:BehavioralFeature.parameter>
@@ -240,6 +301,17 @@
               <UML:ModelElement.stereotype>
                 <UML:Stereotype href = 'http://argouml.org/profiles/uml14/default-uml14.xmi#.:0000000000000830'/>
               </UML:ModelElement.stereotype>
+              <UML:ModelElement.taggedValue>
+                <UML:TaggedValue xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000099E'
+                  isSpecification = 'false'>
+                  <UML:TaggedValue.dataValue>@brief Destroys this object and makes the BackendService accesible again
+
+Destroys this object and makes the BackendService accesible again</UML:TaggedValue.dataValue>
+                  <UML:TaggedValue.type>
+                    <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
+                  </UML:TaggedValue.type>
+                </UML:TaggedValue>
+              </UML:ModelElement.taggedValue>
               <UML:BehavioralFeature.parameter>
                 <UML:Parameter xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000997'
                   name = 'return' isSpecification = 'false' kind = 'return'/>
@@ -273,6 +345,17 @@
           isAbstract = 'false'>
           <UML:Stereotype.baseClass>Operation</UML:Stereotype.baseClass>
         </UML:Stereotype>
+        <UML:TagDefinition xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'
+          name = 'documentation' isSpecification = 'false'>
+          <UML:TagDefinition.multiplicity>
+            <UML:Multiplicity xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000099B'>
+              <UML:Multiplicity.range>
+                <UML:MultiplicityRange xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:000000000000099A'
+                  lower = '0' upper = '0'/>
+              </UML:Multiplicity.range>
+            </UML:Multiplicity>
+          </UML:TagDefinition.multiplicity>
+        </UML:TagDefinition>
       </UML:Namespace.ownedElement>
     </UML:Model>
   </XMI.content>
@@ -282,7 +365,7 @@
       name="Klassendiagramm"
 >
   <group name="Fig0"
-       description="org.argouml.uml.diagram.static_structure.ui.FigClass[168, 48, 431, 264]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
+       description="org.argouml.uml.diagram.static_structure.ui.FigClass[208, 48, 431, 264]pathVisible=false;stereotypeView=0;operationsVisible=true;attributesVisible=true;"
        href="-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000962"
        fill="1"
        fillcolor="white"
@@ -293,7 +376,7 @@
     </private>
     
     <rectangle name="Fig0.0"
-      x="168"
+      x="208"
       y="48"
       width="431"
       height="264"
@@ -303,7 +386,7 @@
       strokecolor="black"
     />
     <text name="Fig0.1"
-      x="169"
+      x="209"
       y="49"
       width="429"
       height="22"
@@ -319,7 +402,7 @@
       justification="Center"
     >BackendService</text>
     <group name="Fig0.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[169, 49, 64, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[209, 49, 64, 0]"
          href="-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000962"
          fill="0"
          fillcolor="white"
@@ -331,7 +414,7 @@
       </private>
       
       <rectangle name="Fig0.2.0"
-        x="169"
+        x="209"
         y="49"
         width="64"
         height="0"
@@ -342,7 +425,7 @@
       />
     </group>
     <rectangle name="Fig0.3"
-      x="168"
+      x="208"
       y="71"
       width="431"
       height="1"
@@ -352,7 +435,7 @@
       strokecolor="black"
     />
     <group name="Fig0.4"
-         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[169, 72, 429, 103]"
+         description="org.argouml.uml.diagram.ui.FigAttributesCompartment[209, 72, 429, 103]"
          href="-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000962"
          fill="0"
          fillcolor="white"
@@ -363,7 +446,7 @@
       </private>
       
       <rectangle name="Fig0.4.0"
-        x="169"
+        x="209"
         y="72"
         width="429"
         height="103"
@@ -373,7 +456,7 @@
         strokecolor="black"
       />
       <text name="Fig0.4.1"
-        x="169"
+        x="209"
         y="72"
         width="429"
         height="16"
@@ -389,7 +472,7 @@
         justification="Left"
       >semesters : QJsonValue</text>
       <text name="Fig0.4.2"
-        x="169"
+        x="209"
         y="88"
         width="429"
         height="16"
@@ -405,7 +488,7 @@
         justification="Left"
       >publicKey : QString</text>
       <text name="Fig0.4.3"
-        x="169"
+        x="209"
         y="104"
         width="429"
         height="16"
@@ -421,7 +504,7 @@
         justification="Left"
       >authorized : bool</text>
       <text name="Fig0.4.4"
-        x="169"
+        x="209"
         y="120"
         width="429"
         height="22"
@@ -438,7 +521,7 @@
       >accessMutex : QMutex</text>
     </group>
     <rectangle name="Fig0.5"
-      x="168"
+      x="208"
       y="175"
       width="431"
       height="1"
@@ -448,7 +531,7 @@
       strokecolor="black"
     />
     <group name="Fig0.6"
-         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[169, 176, 429, 135]"
+         description="org.argouml.uml.diagram.ui.FigOperationsCompartment[209, 176, 429, 135]"
          href="-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000962"
          fill="0"
          fillcolor="white"
@@ -459,7 +542,7 @@
       </private>
       
       <rectangle name="Fig0.6.0"
-        x="169"
+        x="209"
         y="176"
         width="429"
         height="135"
@@ -469,7 +552,7 @@
         strokecolor="black"
       />
       <text name="Fig0.6.1"
-        x="169"
+        x="209"
         y="176"
         width="429"
         height="16"
@@ -485,7 +568,7 @@
         justification="Left"
       >&lt;&lt;slot&gt;&gt; login(token : QString) : bool</text>
       <text name="Fig0.6.2"
-        x="169"
+        x="209"
         y="192"
         width="429"
         height="16"
@@ -501,7 +584,7 @@
         justification="Left"
       >&lt;&lt;create&gt;&gt; BackendService(publicKey : QString,parent : QObject*)</text>
       <text name="Fig0.6.3"
-        x="169"
+        x="209"
         y="208"
         width="429"
         height="16"
@@ -517,7 +600,7 @@
         justification="Left"
       >&lt;&lt;slot&gt;&gt; getSemesters() : QJsonValue</text>
       <text name="Fig0.6.4"
-        x="169"
+        x="209"
         y="224"
         width="429"
         height="16"
@@ -533,7 +616,7 @@
         justification="Left"
       >&lt;&lt;slot&gt;&gt; ready() : bool</text>
       <text name="Fig0.6.5"
-        x="169"
+        x="209"
         y="240"
         width="429"
         height="16"
@@ -547,9 +630,9 @@
         bold="false"
         textsize="12"
         justification="Left"
-      >&lt;&lt;slot&gt;&gt; setSemesters(semesters : QJsonValue) : bool</text>
+      >&lt;&lt;slot&gt;&gt; setSemesters(semesters : QJsonArray) : bool</text>
       <text name="Fig0.6.6"
-        x="169"
+        x="209"
         y="256"
         width="429"
         height="22"
