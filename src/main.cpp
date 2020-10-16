@@ -1,9 +1,9 @@
 #include <QCoreApplication>
 #include "security-provider/client.h"
 #include "server.h"
-#include "src/examplannerserver.h"
+#include "src/backendservice.h"
 
-jsonrpc::Server<ExamPlannerServer> server(9093);
+jsonrpc::Server<BackendService> server(9093);
 QString publicKey;
 
 void startServerWithKey(const QString& key) {

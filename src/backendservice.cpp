@@ -1,8 +1,8 @@
-#include "examplannerserver.h"
+#include "backendservice.h"
 
-QJsonValue ExamPlannerServer::plans = QJsonValue();
+QJsonValue BackendService::plans = QJsonValue();
 
-ExamPlannerServer::ExamPlannerServer(const QString& publicKey, QObject* parent)
+BackendService::BackendService(const QString& publicKey, QObject* parent)
     : QObject(parent), publicKey(publicKey), authorized(false) {
   if (plans.isUndefined() || plans.isNull()) {
     PlanCsvHelper helper("../pruefungsplaner-backend/res/");
@@ -30,7 +30,7 @@ ExamPlannerServer::ExamPlannerServer(const QString& publicKey, QObject* parent)
   }
 }
 
-bool ExamPlannerServer::login(QString token) {
+bool BackendService::login(QString token) {
   try {
     auto verifier =
         jwt::verifier<jwt::default_clock, QtJsonTraits>(jwt::default_clock{})
@@ -58,10 +58,10 @@ bool ExamPlannerServer::login(QString token) {
   }
 }
 
-QJsonValue ExamPlannerServer::getPlans() {
+QJsonValue BackendService::getPlans() {
   return plans;
 }
 
-void ExamPlannerServer::setPlans(QJsonValue newplans) {
+void BackendService::setPlans(QJsonValue newplans) {
   plans = newplans;
 }

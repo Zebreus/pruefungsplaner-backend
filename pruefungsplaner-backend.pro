@@ -16,12 +16,12 @@ INCLUDEPATH += $$PWD/libs/jwt-cpp/include
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
-        src/examplannerserver.cpp \
+        src/backendservice.cpp \
         src/main.cpp
 
 HEADERS += \
         src/QtJsonTraits.h \
-        src/examplannerserver.h
+        src/backendservice.h
 
 LIBS += -lcrypto
 

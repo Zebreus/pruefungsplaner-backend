@@ -22,11 +22,11 @@
 
 #include "src/QtJsonTraits.h"
 
-class ExamPlannerServer : public QObject {
+class BackendService : public QObject {
   Q_OBJECT
 
  public:
-  explicit ExamPlannerServer(const QString& publicKey,
+  explicit BackendService(const QString& publicKey,
                              QObject* parent = nullptr);
 
  public slots:
