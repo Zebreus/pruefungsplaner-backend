@@ -10,6 +10,9 @@ image_resource:
 inputs:
   - name: backend-tests
     optional: false
+  - name: pruefungsplaner-backend
+    path: pruefungsplaner-backend
+    optional: false
 
 run:
   path: "./pruefungsplaner-backend-tests"
