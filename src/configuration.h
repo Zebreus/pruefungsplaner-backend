@@ -13,6 +13,7 @@
 #include <QJsonValue>
 #include <string>
 #include <array>
+#include <vector>
 #include <cpptoml.h>
 #include "plan.h"
 #include "plancsvhelper.h"

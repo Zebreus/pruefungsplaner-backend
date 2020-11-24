@@ -51,7 +51,7 @@ Configuration::Configuration(const QList<QString> &arguments, QObject *parent) :
 
     QCommandLineOption noRetrieveOption("no-retrieve",
             "If set the public key and issuer will not be retrieved from the auth server. This is the default behaviour.");
-    parser.addOption(noCheckOption);
+    parser.addOption(noRetrieveOption);
 
     QCommandLineOption authServerOption("auth-server",
             "The url of the auth server. This should look like \"wss://0.0.0.0:443\".",
@@ -225,7 +225,7 @@ void Configuration::loadConfiguration(const QFile& file)
         auto parsePublicKey = config->get_as<std::string>("security.publicKey").value_or(defaultPublicKey);
         auto parseIssuer = config->get_as<std::string>("security.issuer").value_or(defaultIssuer);
         auto parseAuthUrl = config->get_as<std::string>("security.authUrl").value_or(defaultAuthUrl);
-        auto parseClaims = config->get_array_of<std::string>("security.claims").value_or(defaultRequiredClaims);
+        auto parseClaims = config->get_array_of<std::string>("security.claims").value_or(std::vector<std::string>(defaultRequiredClaims.begin(),defaultRequiredClaims.end()));
         bool parseRetrieve = config->get_as<bool>("security.retrieveSettings").value_or(defaultRetrieveSettings);
         bool parseCheck = config->get_as<bool>("security.checkSettings").value_or(defaultCheckSettings);
         auto parseInitialPath = config->get_as<std::string>("backend.initialData").value_or("");
@@ -276,8 +276,6 @@ void Configuration::readPublicKey(QFile &publicKeyFile)
 {
     if(!publicKeyFile.exists()){
         failConfiguration("Public key file " + publicKeyFile.fileName() + " does not exist.");
-    }else if(!publicKeyFile.isReadable()){
-        failConfiguration("Public key file " + publicKeyFile.fileName() + " does not existis not readable.");
     }
 
     if(publicKeyFile.open(QFile::ReadOnly | QFile::Text)){
@@ -292,11 +290,11 @@ void Configuration::readPublicKey(QFile &publicKeyFile)
 
 void Configuration::checkPublicKey(const QString& publicKey)
 {
-    if(publicKey != ""){
+    if(publicKey == ""){
         failConfiguration("Public key is empty.");
     }
 
-    QString checkPublicKeyCommand("echo -n '%1' | openssl pkey -inform PEM -pubin -in -noout >/dev/null 2>&1");
+    QString checkPublicKeyCommand("echo -n '%1' | openssl pkey -inform PEM -pubin -noout >/dev/null 2>&1");
 
     checkPublicKeyCommand = checkPublicKeyCommand.arg(publicKey);
 
@@ -324,8 +322,6 @@ void Configuration::loadInitialFiles(const QString &initialPath)
         return;
     }else if(!QDir(initialPath).exists()){
         failConfiguration("Initial data path " + initialPath + " does not exist.");
-    }else if(!QDir(initialPath).isReadable()){
-        failConfiguration("Initial data path " + initialPath + " is not readable.");
     }
 
     PlanCsvHelper csvHelper(initialPath);
@@ -343,8 +339,6 @@ void Configuration::loadStoragePath(const QString &storagePathString)
         return;
     }else if(!QDir(storagePathString).exists()){
         failConfiguration("Storage path " + storagePathString + " does not exist.");
-    }else if(!QDir(storagePathString).isReadable()){
-        failConfiguration("Storage path " + storagePathString + " is not readable.");
     }
 
     storagePath.reset(new QDir(storagePathString));
@@ -381,9 +375,6 @@ void Configuration::checkConfiguration()
 
     if(!storagePath->exists()){
         failConfiguration("The storage path does not exist.");
-    }else if(!storagePath->isReadable()){
-        //TODO check writable
-        failConfiguration("The storage path is not readable.");
     }
 
     if(requiredClaims.size() == 0){
