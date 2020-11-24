@@ -19,11 +19,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         src/backendservice.cpp \
+        src/configuration.cpp \
         src/main.cpp
 
 HEADERS += \
         src/QtJsonTraits.h \
-        src/backendservice.h
+        src/backendservice.h \
+        src/configuration.h
 
 LIBS += -lcrypto
 
