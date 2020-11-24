@@ -5,9 +5,24 @@
 #port = 80
 
 [security]
-# Where to find the public key of the auth module
+# Clients need to provide a valid jwt, to read or write data. Those jwts need to be signed
+# by a pruefungsplaner-auth server and have all required claims and the correct issuer.
+# You can either configure the issuer and the public key of the auth provider or
+# retrieve them from a pruefungsplaner-auth server at runtime.
+
+# Check that key and issuer are matching with the auth provider server at authAddress
+#checkSettings = false
+# If this is set, the public key and issuer will be retrieved from the server at authAddress
+#retrieveSettings = false
+
+# The jwt needs to be signed by the matching private key
 #publicKey = "/usr/share/pruefungsplaner-backend/keys/public_key.pem"
+# Additionally this needs to be the issuer of the token
 #issuer = "pruefungsplaner-auth"
+# The address where the auth module listens
+#authUrl = "ws://pruefungsplaner-auth:80"
+
+# The token needs these claims with the value true
 #claims = ["pruefungsplanerRead","pruefungsplanerWrite"]
 
 [backend]
