@@ -9,6 +9,7 @@ include($$PWD/libs/security-provider/client/client.pri)
 include($$PWD/libs/security-provider/security-provider.pri)
 include($$PWD/libs/qt-jsonrpc-server/qt-jsonrpc-server.pri)
 INCLUDEPATH += $$PWD/libs/jwt-cpp/include
+INCLUDEPATH += $$PWD/libs/cpptoml/include
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
