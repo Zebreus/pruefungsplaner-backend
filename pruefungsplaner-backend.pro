@@ -46,7 +46,36 @@ else{
     TARGET = pruefungsplaner-backend
 }
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
+unix{
+    # Install executable
+    target.path = /usr/bin
+
+    # Install default config file
+    config.path = /etc/$${TARGET}/
+    config.files = res/config.toml
+
+    # Create data directory
+    datadir.path = /usr/share/$${TARGET}
+    datadir.extra = " "
+    datadir.uninstall = " "
+
+    # Create directory for keys
+    keys.path = $${datadir.path}/keys
+    keys.extra = " "
+    keys.uninstall = " "
+
+    # Create directory for storage
+    storage.path = $${datadir.path}/data
+    storage.extra = " "
+    storage.uninstall = " "
+}
+
 !isEmpty(target.path): INSTALLS += target
+!isEmpty(config.path): INSTALLS += config
+!isEmpty(keys.path): INSTALLS += keys
+!isEmpty(storage.path): INSTALLS += storage
+!isEmpty(datadir.path): INSTALLS += datadir
+
+DEFINES += DEFAULT_CONFIG_PATH=\"\\\"$${config.path}\\\"\" \
+           DEFAULT_KEYS_PATH=\"\\\"$${keys.path}\\\"\"\
+           DEFAULT_STORAGE_PATH=\"\\\"$${storage.path}\\\"\"
