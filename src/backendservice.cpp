@@ -1,34 +1,14 @@
 #include "backendservice.h"
 
 BackendService::BackendService(QSharedPointer<QJsonValue> semesters,
-                               QSharedPointer<QMutex> accessMutex, const QString& publicKey, QObject* parent)
-    : QObject(parent), semesters(semesters), accessMutex(accessMutex), publicKey(publicKey), authorized(false) {
-  // Load plans if not initialized yet
-  if (semesters->isUndefined() || semesters->isNull()) {
-    PlanCsvHelper helper("../pruefungsplaner-backend/res/");
-    system("ls ../pruefungsplaner-backend/res/");
-    QSharedPointer<Plan> plan = helper.readPlan();
-    if (plan != nullptr) {
-      plan->setName("Plan A");
-
-      QList<Plan*> newPlans;
-      newPlans.append(plan.get());
-
-      Semester* semester = new Semester();
-      semester->setName("WS 2019");
-      plan->setParent(semester);
-      semester->setPlans(newPlans);
-
-      QJsonArray arr;
-      QJsonValue semesterValue = semester->toJsonObject();
-      arr.append(semesterValue);
-
-      *semesters = QJsonValue(arr);
-    } else {
-      qDebug() << "Failed to read plan from ../pruefungsplaner-backend/res/.";
-    }
-  }
-}
+                               QSharedPointer<QMutex> accessMutex,
+                               QSharedPointer<Configuration> config,
+                               QObject* parent)
+    : QObject(parent),
+      semesters(semesters),
+      accessMutex(accessMutex),
+      config(config),
+      authorized(false) {}
 
 BackendService::~BackendService() {
   if (authorized) {
@@ -97,12 +77,12 @@ bool BackendService::verifyToken(const QString& token) {
 
     auto decodedToken = jwt::decode<QtJsonTraits>(token);
 
-    if(!decodedToken.has_expires_at()){
-        throw std::runtime_error("Missing exp");
+    if (!decodedToken.has_expires_at()) {
+      throw std::runtime_error("Missing exp");
     }
 
-    if(!decodedToken.has_issued_at()){
-        throw std::runtime_error("Missing iat");
+    if (!decodedToken.has_issued_at()) {
+      throw std::runtime_error("Missing iat");
     }
 
     verifier.verify(decodedToken);
@@ -118,5 +98,5 @@ bool BackendService::verifyToken(const QString& token) {
                 "This should not happen.";
     return false;
   }
-    return false;
+  return false;
 }

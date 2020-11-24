@@ -21,6 +21,7 @@
 #include <jwt-cpp/jwt.h>
 
 #include <QMutex>
+#include "configuration.h"
 #include "src/QtJsonTraits.h"
 
 class BackendService : public QObject {
@@ -29,12 +30,12 @@ class BackendService : public QObject {
  public:
   /**
    *  @brief Create a  BackendService object
-   *  @param [in] publicKey is the RSA256 public key of the securityprovider
+   *  @param [in] configuration is the configuration of the server
    *  @param [in] parent is the parent of this QObject
    */
   explicit BackendService(QSharedPointer<QJsonValue> semesters,
                           QSharedPointer<QMutex> accessMutex,
-                          const QString& publicKey,
+                          QSharedPointer<Configuration> config,
                           QObject* parent = nullptr);
 
   /**
@@ -98,6 +99,7 @@ class BackendService : public QObject {
   QSharedPointer<QJsonValue> semesters;
   QSharedPointer<QMutex> accessMutex;
   QString publicKey;
+  QSharedPointer<Configuration> config;
   /**
    *  @brief Stores if this BackendService instance is authorized
    *  If the instance is authorized it also locks accessMutex
