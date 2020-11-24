@@ -1,0 +1,17 @@
+[server]
+# The adress on which the server should be listening
+#address = "0.0.0.0"
+# The port on which the server should be listening
+#port = 80
+
+[security]
+# Where to find the public key of the auth module
+#publicKey = "/usr/share/pruefungsplaner-backend/keys/public_key.pem"
+#issuer = "pruefungsplaner-auth"
+#claims = ["pruefungsplanerRead","pruefungsplanerWrite"]
+
+[backend]
+# If this is specified, csv files here are read at start of the program
+#initialData = ""
+# For now data will be stored as json files in this path
+#storagePath = "/usr/share/pruefungsplaner-backend/data/"
