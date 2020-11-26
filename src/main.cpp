@@ -3,7 +3,7 @@
 #include <QCoreApplication>
 #include <QList>
 #include "configuration.h"
-#include "security-provider/client.h"
+#include "pruefungsplaner-auth/client.h"
 #include "server.h"
 #include "src/backendservice.h"
 
