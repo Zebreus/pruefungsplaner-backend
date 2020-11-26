@@ -52,6 +52,15 @@ QJsonValue BackendService::getSemesters() {
 bool BackendService::setSemesters(QJsonArray semesters) {
   if (authorized) {
     *this->semesters = semesters;
+    QJsonDocument semesterDocument(semesters);
+    QFile storage(config->getStoragePath().path() + "/semesters.json");
+    if (storage.open(QFile::WriteOnly)) {
+        storage.write(semesterDocument.toJson());
+        storage.close();
+        qDebug() << "Wrote semesters.";
+    }else{
+        qDebug() << "Failed to write semesters";
+    }
     return true;
   } else {
     return false;
@@ -62,18 +71,19 @@ bool BackendService::verifyToken(const QString& token) {
   try {
     auto verifier =
         jwt::verifier<jwt::default_clock, QtJsonTraits>(jwt::default_clock{})
-            .with_claim("pruefungsplanerRead",
-                        jwt::basic_claim<QtJsonTraits>(QString("true")))
-            .with_claim("pruefungsplanerWrite",
-                        jwt::basic_claim<QtJsonTraits>(QString("true")))
-            .allow_algorithm(jwt::algorithm::rs256(
-                publicKey.toUtf8().constData(), "", "", ""))
             .with_audience(QJsonArray{"pruefungsplaner-backend"})
-            .with_issuer("securityprovider")
             .issued_at_leeway(0)
             .not_before_leeway(0)
             .expires_at_leeway(0)
             .leeway(0);
+
+    verifier = verifier.with_issuer(config->getIssuer());
+    verifier = verifier.allow_algorithm(jwt::algorithm::rs256(config->getPublicKey().toUtf8().constData(), "", "", ""));
+
+    for(const QString& claim : config->getClaims()){
+        qDebug() << "With claim " << claim;
+        verifier = verifier.with_claim(claim, jwt::basic_claim<QtJsonTraits>(QString("true")));
+    }
 
     auto decodedToken = jwt::decode<QtJsonTraits>(token);
 

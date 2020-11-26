@@ -177,23 +177,14 @@ QString Configuration::getPublicKey() const
     return publicKey;
 }
 
-bool Configuration::checkIssuer(const QString &issuer) const
+QString Configuration::getIssuer() const
 {
-    if(issuer == this->issuer){
-        return true;
-    }else{
-        return false;
-    }
+    return issuer;
 }
 
-bool Configuration::checkClaims(const QList<QString> &suppliedClaims) const
+QList<QString> Configuration::getClaims() const
 {
-    for(const QString& claim : requiredClaims){
-        if(!suppliedClaims.contains(claim)){
-            return false;
-        }
-    }
-    return true;
+    return requiredClaims;
 }
 
 QJsonValue Configuration::getInitialData() const

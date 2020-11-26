@@ -60,8 +60,8 @@ public:
     QString getAddress() const;
     quint16 getPort() const;
     QString getPublicKey() const;
-    bool checkIssuer(const QString& issuer) const;
-    bool checkClaims(const QList<QString>& suppliedClaims) const;
+    QString getIssuer() const;
+    QList<QString> getClaims() const;
     QJsonValue getInitialData() const;
     QDir getStoragePath() const;
 

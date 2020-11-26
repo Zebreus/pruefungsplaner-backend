@@ -98,7 +98,6 @@ class BackendService : public QObject {
  private:
   QSharedPointer<QJsonValue> semesters;
   QSharedPointer<QMutex> accessMutex;
-  QString publicKey;
   QSharedPointer<Configuration> config;
   /**
    *  @brief Stores if this BackendService instance is authorized
