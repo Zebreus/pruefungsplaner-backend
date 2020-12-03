@@ -24,7 +24,7 @@ Configuration::Configuration(const QList<QString> &arguments, QObject *parent) :
 
     QCommandLineOption publicKeyOption("public-key",
             "The public RSA256 key file in .pem format.",
-            "privatekey");
+            "publickey");
     parser.addOption(publicKeyOption);
 
     QCommandLineOption issuerOption("issuer",
