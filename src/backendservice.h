@@ -58,11 +58,11 @@ class BackendService : public QObject {
 
   /**
    *  @brief Authorize the connection
-   *  @param [in] token is a json web token signed by the securityprovider
+   *  @param [in] token is a json web token signed by pruefungsplaner-auth
    *  @return True if BackendService is ready and the token is valid.
    *
    *  Authorize the connection to the BackendService. token needs to be issued
-   * and signed by the securityprovider and contains the claims
+   * and signed by pruefungsplaner-auth and contains the claims
    * 'pruefungsplanerRead' and 'pruefungsplanerWrite' with the value 'true'.
    * This function will always returns false if the BackendService is not ready.
    * If this BackendService instance is already authorized it will return true.
@@ -90,7 +90,7 @@ class BackendService : public QObject {
  private:
   /**
    *  @brief Checks if token is signed and valid
-   *  @param [in] token is a json web token signed by the securityprovider
+   *  @param [in] token is a json web token signed by pruefungsplaner-auth
    *  @return True if the token is signed and valid
    */
   bool verifyToken(const QString& token);

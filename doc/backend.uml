@@ -58,7 +58,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Fri Oct 16 14:25:49 CEST 2020'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Thu Dec 03 12:26:51 CET 2020'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.35.1(6) revised on $Date: 2012-12-30 14:06:01 +0100 (Sun, 30 Dec 2012) $ </XMI.exporterVersion>
@@ -99,10 +99,10 @@
                 <UML:TaggedValue xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009A0'
                   isSpecification = 'false'>
                   <UML:TaggedValue.dataValue>@brief Authorize the connection
-@param [in] token is a json web token signed by the securityprovider
+@param [in] token is a json web token signed by pruefungsplaner-auth
 @return True if BackendService is ready and the token is valid.
 
-Authorize the connection to the BackendService. token needs to be issued and signed by the securityprovider and contains the claims &apos;pruefungsplanerRead&apos; and &apos;pruefungsplanerWrite&apos; with the value &apos;true&apos;. This function will always returns false if the BackendService is not ready. If this BackendService instance is already authorized it will return true.</UML:TaggedValue.dataValue>
+Authorize the connection to the BackendService. token needs to be issued and signed by pruefungsplaner-auth and contains the claims &apos;pruefungsplanerRead&apos; and &apos;pruefungsplanerWrite&apos; with the value &apos;true&apos;. This function will always returns false if the BackendService is not ready. If this BackendService instance is already authorized it will return true.</UML:TaggedValue.dataValue>
                   <UML:TaggedValue.type>
                     <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
                   </UML:TaggedValue.type>
@@ -183,7 +183,7 @@ Authorize the connection to the BackendService. token needs to be issued and sig
                   <UML:TaggedValue.dataValue>@brief Get all semesters and plans
 @return A QJsonValue containing a array of Semester objects
 
-Get all semesters as a QJsonValue. The result is a json array containing objects that can be parsed into Semester objects.</UML:TaggedValue.dataValue>
+Get all semesters as a QJsonValue. The result is a json array containing objects that can be parsed into Semester objects. The result is a QJsonValue::Undefined if not authorized;</UML:TaggedValue.dataValue>
                   <UML:TaggedValue.type>
                     <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
                   </UML:TaggedValue.type>
@@ -347,7 +347,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
                 <UML:TaggedValue xmi.id = '-64--88--55-65--777a9939:17530e43fbb:-8000:00000000000009A9'
                   isSpecification = 'false'>
                   <UML:TaggedValue.dataValue>@brief Checks if token is signed and valid
-@param [in] token is a json web token signed by the securityprovider
+@param [in] token is a json web token signed by pruefungsplaner-auth
 @return True if the token is signed and valid</UML:TaggedValue.dataValue>
                   <UML:TaggedValue.type>
                     <UML:TagDefinition xmi.idref = '-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000999'/>
@@ -460,7 +460,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       justification="Center"
     >BackendService</text>
     <group name="Fig0.2"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[209, 49, 64, 0]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[209, 49, 962, 0]"
          href="-64--88--55-65--777a9939:17530e43fbb:-8000:0000000000000962"
          fill="0"
          fillcolor="white"
@@ -474,7 +474,7 @@ Destroys this object and makes the BackendService accesible again</UML:TaggedVal
       <rectangle name="Fig0.2.0"
         x="209"
         y="49"
-        width="64"
+        width="962"
         height="0"
         fill="0"
         fillcolor="white"

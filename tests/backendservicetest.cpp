@@ -24,7 +24,7 @@ class BackendServiceTests : public ::testing::Test {
     QList<QString> arguments;
     arguments << ""
               << "--issuer"
-              << "securityprovider"
+              << "pruefungsplaner-auth"
               << "--claims"
               << "pruefungsplanerRead"
               << "--claims"
@@ -101,7 +101,7 @@ class BackendServiceTests : public ::testing::Test {
     jwt::builder tokenBuilder =
         jwt::create<QtJsonTraits>()
             .set_type("JWT")
-            .set_issuer("securityprovider")
+            .set_issuer("pruefungsplaner-auth")
             .set_audience(QJsonArray{"pruefungsplaner-backend"})
             .set_subject("test")
             .set_issued_at(std::chrono::system_clock::now())
@@ -122,7 +122,7 @@ class BackendServiceTests : public ::testing::Test {
     jwt::builder tokenBuilder =
         jwt::create<QtJsonTraits>()
             .set_type("JWT")
-            .set_issuer("not-the-securityprovider")
+            .set_issuer("not-pruefungsplaner-auth")
             .set_audience(QJsonArray{"not-pruefungsplaner-backend"})
             .set_subject("test")
             .set_issued_at(std::chrono::system_clock::now())
@@ -191,7 +191,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("not-the-securityprovider")
+          .set_issuer("not-pruefungsplaner-auth")
           .set_audience(QJsonArray{"pruefungsplaner-backend"})
           .set_subject("test")
           .set_issued_at(std::chrono::system_clock::now())
@@ -208,7 +208,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_subject("test")
           .set_issued_at(std::chrono::system_clock::now())
           .set_expires_at(std::chrono::system_clock::now() +
@@ -240,7 +240,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_audience(QJsonArray{"not-pruefungsplaner-backend"})
           .set_subject("test")
           .set_issued_at(std::chrono::system_clock::now())
@@ -257,7 +257,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_audience(QJsonArray{"pruefungsplaner-backend"})
           .set_subject("test")
           .set_issued_at(std::chrono::system_clock::now())
@@ -274,7 +274,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_audience(QJsonArray{"pruefungsplaner-backend"})
           .set_subject("test")
           .set_issued_at(std::chrono::system_clock::now())
@@ -289,7 +289,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_audience(QJsonArray{"pruefungsplaner-backend"})
           .set_subject("test")
           .set_issued_at(std::chrono::system_clock::now())
@@ -306,7 +306,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_audience(QJsonArray{"pruefungsplaner-backend"})
           .set_subject("test")
           .set_issued_at(std::chrono::system_clock::now())
@@ -321,7 +321,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_audience(QJsonArray{"pruefungsplaner-backend"})
           .set_subject("test")
           .set_issued_at(std::chrono::system_clock::now() -
@@ -339,7 +339,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_audience(QJsonArray{"pruefungsplaner-backend"})
           .set_subject("test")
           .set_issued_at(std::chrono::system_clock::now() +
@@ -357,7 +357,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_audience(QJsonArray{"pruefungsplaner-backend"})
           .set_subject("test")
           .set_issued_at(std::chrono::system_clock::now())
@@ -372,7 +372,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_audience(QJsonArray{"pruefungsplaner-backend"})
           .set_subject("test")
           .set_expires_at(std::chrono::system_clock::now() +
@@ -388,7 +388,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_audience(QJsonArray{"pruefungsplaner-backend"})
           .set_issued_at(std::chrono::system_clock::now())
           .set_expires_at(std::chrono::system_clock::now() +
@@ -404,7 +404,7 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
   tokenBuilder =
       jwt::create<QtJsonTraits>()
           .set_type("JWT")
-          .set_issuer("securityprovider")
+          .set_issuer("pruefungsplaner-auth")
           .set_audience(QJsonArray{"pruefungsplaner-backend"})
           .set_subject("test")
           .set_issued_at(std::chrono::system_clock::now())
