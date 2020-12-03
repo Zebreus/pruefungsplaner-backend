@@ -7,6 +7,7 @@
 #include <QSignalSpy>
 #include <QString>
 #include "QtJsonTraits.h"
+#include "configuration.h"
 #include "qthelper.cpp"
 using namespace testing;
 
@@ -14,18 +15,40 @@ class BackendServiceTests : public ::testing::Test {
  protected:
   void SetUp() override {
     loadKeys();
+    loadConfigurations();
     mutex.reset(new QMutex());
     semesters = loadExampleSemesters();
   }
 
+  void loadConfigurations() {
+    QList<QString> arguments;
+    arguments << ""
+              << "--issuer"
+              << "securityprovider"
+              << "--claims"
+              << "pruefungsplanerRead"
+              << "--claims"
+              << "pruefungsplanerWrite";
+    QList<QString> arguments1 = arguments;
+    QList<QString> arguments2 = arguments;
+    arguments1 << "--public-key"
+               << ":/pruefungsplaner-auth-test/testdata/public1.pem"
+               << "--storage" << storage1.path();
+    arguments2 << "--public-key"
+               << ":/pruefungsplaner-auth-test/testdata/public2.pem"
+               << "--storage" << storage2.path();
+    configuration1.reset(new Configuration(arguments1));
+    configuration2.reset(new Configuration(arguments2));
+  }
+
   void loadKeys() {
-    privateKey1 = loadFile(":/securityprovider/testdata/private1.pem");
+    privateKey1 = loadFile(":/pruefungsplaner-auth-test/testdata/private1.pem");
     ASSERT_NE(privateKey1, "");
-    publicKey1 = loadFile(":/securityprovider/testdata/public1.pem");
+    publicKey1 = loadFile(":/pruefungsplaner-auth-test/testdata/public1.pem");
     ASSERT_NE(publicKey1, "");
-    privateKey2 = loadFile(":/securityprovider/testdata/private2.pem");
+    privateKey2 = loadFile(":/pruefungsplaner-auth-test/testdata/private2.pem");
     ASSERT_NE(privateKey2, "");
-    publicKey2 = loadFile(":/securityprovider/testdata/public2.pem");
+    publicKey2 = loadFile(":/pruefungsplaner-auth-test/testdata/public2.pem");
     ASSERT_NE(publicKey2, "");
   }
 
@@ -120,8 +143,7 @@ class BackendServiceTests : public ::testing::Test {
     }
 
     return tokenBuilder.sign(
-        jwt::algorithm::rs256("",
-                              key.toUtf8().constData(), "", ""));
+        jwt::algorithm::rs256("", key.toUtf8().constData(), "", ""));
   }
 
   QString privateKey1;
@@ -131,24 +153,28 @@ class BackendServiceTests : public ::testing::Test {
 
   QSharedPointer<QMutex> mutex;
   QSharedPointer<QJsonValue> semesters;
+  QSharedPointer<Configuration> configuration1;
+  QSharedPointer<Configuration> configuration2;
+  QTemporaryDir storage1;
+  QTemporaryDir storage2;
 
   void TearDown() override {}
 };
 
 TEST_F(BackendServiceTests, loginSucceedsWithValidToken) {
-  BackendService backend(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
   QString token = createValidToken();
   ASSERT_TRUE(backend.login(token)) << "Token is " << token.toStdString();
 }
 
 TEST_F(BackendServiceTests, loginFailsWithInvalidToken) {
-  BackendService backend(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
   QString token = createInvalidToken();
   ASSERT_FALSE(backend.login(token)) << "Token is " << token.toStdString();
 }
 
 TEST_F(BackendServiceTests, loginSucceedsOnSecondTryWithDifferentToken) {
-  BackendService backend(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
   QString invalidToken = createInvalidToken();
   QString token = createValidToken();
   ASSERT_FALSE(backend.login(invalidToken))
@@ -157,7 +183,7 @@ TEST_F(BackendServiceTests, loginSucceedsOnSecondTryWithDifferentToken) {
 }
 
 TEST_F(BackendServiceTests, invalidTokensGetDetected) {
-  BackendService backend(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
 
   jwt::builder<QtJsonTraits> tokenBuilder;
 
@@ -393,8 +419,8 @@ TEST_F(BackendServiceTests, invalidTokensGetDetected) {
 }
 
 TEST_F(BackendServiceTests, loginFailsWhenNotReady) {
-  BackendService backend(semesters, mutex, publicKey1);
-  BackendService backend2(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
+  BackendService backend2(semesters, mutex, configuration1);
   QString token = createValidToken();
 
   ASSERT_TRUE(backend.login(token)) << "Token is " << token.toStdString();
@@ -403,7 +429,7 @@ TEST_F(BackendServiceTests, loginFailsWhenNotReady) {
 }
 
 TEST_F(BackendServiceTests, loginReturnsTrueWhenAlreadyAuthorized) {
-  BackendService backend(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
   QString token = createValidToken();
 
   ASSERT_TRUE(backend.login(token)) << "Token is " << token.toStdString();
@@ -411,29 +437,29 @@ TEST_F(BackendServiceTests, loginReturnsTrueWhenAlreadyAuthorized) {
 }
 
 TEST_F(BackendServiceTests, readyAfterReady) {
-  BackendService backend(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
   ASSERT_TRUE(backend.ready());
   ASSERT_TRUE(backend.ready());
-  BackendService backend2(semesters, mutex, publicKey1);
+  BackendService backend2(semesters, mutex, configuration1);
   ASSERT_TRUE(backend2.ready());
   ASSERT_TRUE(backend.ready());
 }
 
 TEST_F(BackendServiceTests, readyBeforeFirstLogin) {
-  BackendService backend(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
   ASSERT_TRUE(backend.ready());
 }
 
 TEST_F(BackendServiceTests, readyAfterFailedLogin) {
-  BackendService backend(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
   QString token = createInvalidToken();
   EXPECT_FALSE(backend.login(token)) << "Token is " << token.toStdString();
   ASSERT_TRUE(backend.ready());
 }
 
 TEST_F(BackendServiceTests, notReadyDuringOtherSession) {
-  BackendService backend(semesters, mutex, publicKey1);
-  BackendService backend2(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
+  BackendService backend2(semesters, mutex, configuration1);
   QString token = createValidToken();
   EXPECT_TRUE(backend.login(token)) << "Token is " << token.toStdString();
   ASSERT_FALSE(backend.ready());
@@ -441,8 +467,9 @@ TEST_F(BackendServiceTests, notReadyDuringOtherSession) {
 }
 
 TEST_F(BackendServiceTests, readyAfterFinishedSession) {
-  BackendService* backend = new BackendService(semesters, mutex, publicKey1);
-  BackendService backend2(semesters, mutex, publicKey1);
+  BackendService* backend =
+      new BackendService(semesters, mutex, configuration1);
+  BackendService backend2(semesters, mutex, configuration1);
   QString token = createValidToken();
   EXPECT_TRUE(backend->login(token)) << "Token is " << token.toStdString();
   EXPECT_FALSE(backend->ready());
@@ -452,8 +479,8 @@ TEST_F(BackendServiceTests, readyAfterFinishedSession) {
 }
 
 TEST_F(BackendServiceTests, getSemestersReturnsUndefinedWithoutAuthorization) {
-  BackendService backend(semesters, mutex, publicKey1);
-  BackendService backend2(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
+  BackendService backend2(semesters, mutex, configuration1);
   QString token = createInvalidToken();
   EXPECT_FALSE(backend2.login(token)) << "Token is " << token.toStdString();
   ASSERT_EQ(backend.getSemesters(), QJsonValue::Undefined);
@@ -461,7 +488,7 @@ TEST_F(BackendServiceTests, getSemestersReturnsUndefinedWithoutAuthorization) {
 }
 
 TEST_F(BackendServiceTests, getSemestersReturnsSemestersWithAuthorization) {
-  BackendService backend(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
   QString token = createValidToken();
   EXPECT_TRUE(backend.login(token)) << "Token is " << token.toStdString();
   // TODO do not check the id values of the json objects, because it is valid to
@@ -470,8 +497,8 @@ TEST_F(BackendServiceTests, getSemestersReturnsSemestersWithAuthorization) {
 }
 
 TEST_F(BackendServiceTests, setSemestersReturnsFalseWithoutAuthorization) {
-  BackendService backend(semesters, mutex, publicKey1);
-  BackendService backend2(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
+  BackendService backend2(semesters, mutex, configuration1);
   QString token = createInvalidToken();
   EXPECT_FALSE(backend2.login(token)) << "Token is " << token.toStdString();
   ASSERT_FALSE(backend.setSemesters(semesters->toArray()));
@@ -479,7 +506,7 @@ TEST_F(BackendServiceTests, setSemestersReturnsFalseWithoutAuthorization) {
 }
 
 TEST_F(BackendServiceTests, setSemestersSetsSemesters) {
-  BackendService backend(semesters, mutex, publicKey1);
+  BackendService backend(semesters, mutex, configuration1);
   QSharedPointer<QJsonValue> modifiedSemesters = loadExampleSemesters();
   QJsonArray tempSemesters = modifiedSemesters->toArray();
   QJsonObject tempPlan = tempSemesters[0].toObject();
