@@ -101,7 +101,7 @@ bool BackendService::verifyToken(const QString& token) {
              << " logged in with valid token";
     return true;
   } catch (std::runtime_error& e) {
-    qDebug() << "Invalid token";
+    qDebug() << "Invalid token: " << e.what();
     return false;
   } catch (...) {
     qDebug() << "Unexpected exception thrown in BackendService::verifyToken. "
