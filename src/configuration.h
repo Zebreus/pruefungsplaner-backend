@@ -15,6 +15,7 @@
 #include <array>
 #include <vector>
 #include <cpptoml.h>
+#include "semester.h"
 #include "plan.h"
 #include "plancsvhelper.h"
 

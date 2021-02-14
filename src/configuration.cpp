@@ -320,7 +320,10 @@ void Configuration::loadInitialFiles(const QString &initialPath)
     if(plan.isNull()){
         failConfiguration("Failed to read initial plan at " + initialPath);
     }
-    QJsonArray semesters{plan->toJsonObject()};
+    Semester semester;
+    semester.setName("New semester");
+    semester.setPlans(QList<Plan*>{plan.get()});
+    QJsonArray semesters{semester.toJsonObject()};
     initialData.reset(new QJsonValue(semesters));
 }
 
