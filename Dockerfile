@@ -1,4 +1,4 @@
-FROM alpine:edge AS backend-builder
+FROM alpine:3.13.1 AS backend-builder
 
 RUN apk update && apk add build-base qt5-qtbase-dev qt5-qtwebsockets-dev openssl
 ENV PATH="/usr/lib/qt5/bin/:${PATH}"
@@ -9,7 +9,7 @@ COPY . /pruefungsplaner-backend
 
 RUN mkdir -p /install && cd /pruefungsplaner-backend/ && qmake && make -j8 install INSTALL_ROOT=/install/
 
-FROM alpine:edge
+FROM alpine:3.13.1
 MAINTAINER Lennart E.
 
 RUN apk update && apk add qt5-qtbase qt5-qtwebsockets openssl tini
