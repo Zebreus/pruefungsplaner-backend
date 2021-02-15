@@ -69,10 +69,10 @@ class BackendServiceTests : public ::testing::Test {
     QSharedPointer<QJsonValue> semesters(new QJsonValue());
 
     PlanCsvHelper helper("../pruefungsplaner-backend/res/");
-    QSharedPointer<Plan> plan = helper.readPlan();
+    QScopedPointer<Plan> plan(helper.readPlan());
     EXPECT_NE(plan.get(), nullptr)
         << "Failed to read plan from ../pruefungsplaner-backend/res/.";
-    if (plan != nullptr) {
+    if (plan.get() != nullptr) {
       plan->setName("Plan A");
 
       QList<Plan*> newPlans;

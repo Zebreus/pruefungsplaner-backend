@@ -316,13 +316,13 @@ void Configuration::loadInitialFiles(const QString &initialPath)
     }
 
     PlanCsvHelper csvHelper(initialPath);
-    QSharedPointer<Plan> plan = csvHelper.readPlan();
-    if(plan.isNull()){
-        failConfiguration("Failed to read initial plan at " + initialPath);
-    }
     Semester semester;
     semester.setName("New semester");
-    semester.setPlans(QList<Plan*>{plan.get()});
+    Plan* plan = csvHelper.readPlan(&semester);
+    if(plan == nullptr){
+        failConfiguration("Failed to read initial plan at " + initialPath);
+    }
+    semester.setPlans(QList<Plan*>{plan});
     QJsonArray semesters{semester.toJsonObject()};
     initialData.reset(new QJsonValue(semesters));
 }
