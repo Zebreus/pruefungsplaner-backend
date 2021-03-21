@@ -38,11 +38,12 @@ test{
     INCLUDEPATH *= $$PWD/src
 
     CONFIG *= thread
-    LIBS *= -lgtest -lgtest_main
+    LIBS *= -lgtest
 
     SOURCES -= src/main.cpp
     SOURCES += tests/qthelper.cpp \
-            tests/backendservicetest.cpp
+               tests/backendservicetest.cpp \
+               libs/gtest/main.cpp
 }
 else{
     TEMPLATE = app
